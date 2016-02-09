@@ -4,7 +4,7 @@ public class Recursion{
 	return "Wang," + "Kelly";
     }
     public double sqrtH(double guess, double n){
-	if((Math.abs(n - guess*guess) / ((guess*guess + n) / 2)) * 100 < 1){
+	if((Math.abs(n - guess*guess) / ((guess*guess + n) / 2)) * 100 < 0.0000000000001){
 	    return guess;
 	}
 	return sqrtH((n/guess + guess)/2,n);
