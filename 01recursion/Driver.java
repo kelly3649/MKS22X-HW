@@ -1,6 +1,7 @@
 public class Driver{
     public static void main(String[]args){
 	Recursion r1 = new Recursion();
+	System.out.println(r1.sqrt(0.0));
        	System.out.println(r1.sqrt(1.0));
 	System.out.println(r1.sqrt(2.0));
 	System.out.println(r1.sqrt(100.0));
