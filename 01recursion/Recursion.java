@@ -10,6 +10,9 @@ public class Recursion{
 	return sqrtH((n/guess + guess)/2,n);
     }
     public double sqrt(double n){
+	if(n < 0){
+	    throw new IllegalArgumentException();
+	}
 	return sqrtH(n/2,n);
     }
 }
