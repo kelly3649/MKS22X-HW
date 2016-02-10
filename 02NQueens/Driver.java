@@ -10,7 +10,12 @@ public class Driver{
 	b1.printBoard();
 	b1.addQueen(0,0);
 	b1.printBoard();
-	b1.addQueen(3,1);
+	b1.addQueen(2,1);
 	b1.printBoard();
+	b1.addQueen(3,3);
+	b1.printBoard();
+	b1.rmvQueen(2,1);
+	b1.printBoard();
+
     }
 }
