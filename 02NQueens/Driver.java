@@ -8,5 +8,9 @@ public class Driver{
 	    b1 = new Board();
 	}
 	b1.printBoard();
+	b1.addQueen(0,0);
+	b1.printBoard();
+	b1.addQueen(3,1);
+	b1.printBoard();
     }
 }
