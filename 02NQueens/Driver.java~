@@ -1,0 +1,11 @@
+public class Driver{
+    public static void main(String[]args){
+	if(args.length > 0){
+	    Board b1 = new Board(Integer.parseInt(args[0]));
+	}
+	else{
+	    Board b1 = new Board();
+	}
+	b1.printBoard();
+    }
+}
