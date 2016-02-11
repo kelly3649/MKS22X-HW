@@ -1,15 +1,15 @@
 public class Driver{
     public static void main(String[]args){
-	Board b1;
+	QueenBoard b1;
 	if(args.length > 0){
-	    b1 = new Board(Integer.parseInt(args[0]));
+	    b1 = new QueenBoard(Integer.parseInt(args[0]));
 	}
 	else{
-	    b1 = new Board();
+	    b1 = new QueenBoard();
 	}
-	Board b = new Board(1);
-	Board b2 = new Board(2);
-	Board b3 = new Board(3);
+	QueenBoard b = new QueenBoard(1);
+	QueenBoard b2 = new QueenBoard(2);
+	QueenBoard b3 = new QueenBoard(3);
 	
 	/*	b1.printBoard();
 	b1.addQueen(0,0);
