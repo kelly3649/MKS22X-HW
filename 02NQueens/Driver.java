@@ -11,7 +11,7 @@ public class Driver{
 	Board b2 = new Board(2);
 	Board b3 = new Board(3);
 	
-	b1.printBoard();
+	/*	b1.printBoard();
 	b1.addQueen(0,0);
 	b1.printBoard();
 	b1.addQueen(2,1);
@@ -19,9 +19,10 @@ public class Driver{
 	b1.addQueen(3,3);
 	b1.printBoard();
 	b1.rmvQueen(2,1);
-	b1.printBoard();
-	b.solve();
-	b2.solve();
-	b3.solve();
+	b1.printBoard();*/
+	b.solve();//works!
+	b.printSolution();
+	//b2.solve();
+	//b3.solve();
     }
 }
