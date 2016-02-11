@@ -7,6 +7,10 @@ public class Driver{
 	else{
 	    b1 = new Board();
 	}
+	Board b = new Board(1);
+	Board b2 = new Board(2);
+	Board b3 = new Board(3);
+	
 	b1.printBoard();
 	b1.addQueen(0,0);
 	b1.printBoard();
@@ -16,6 +20,8 @@ public class Driver{
 	b1.printBoard();
 	b1.rmvQueen(2,1);
 	b1.printBoard();
-
+	b.solve();
+	b2.solve();
+	b3.solve();
     }
 }

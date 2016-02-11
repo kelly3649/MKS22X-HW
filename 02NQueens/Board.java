@@ -46,7 +46,16 @@ public class Board{
 	System.out.println("Queen placed!");
 	return true;
     }
-		
+    public boolean canPlace(int row, int col){ //adds the queen if canPlace
+	addQueen(row, col);
+	int i = 0;
+	while(i<board.length){
+	    if(board[i][col+1] == 0){
+		return true;
+	    }
+	}
+	return false;
+    }
 	
     public boolean rmvQueen(int row, int col){
 	if(board[row][col] != 1){
@@ -68,19 +77,33 @@ public class Board{
 	System.out.println("Queen removed!");
 	return true;
     }
+    
     public boolean solveH(int col){
 	int row = 0;
 	int lastrow = 0;
-	while(row<board.length){
-	    if(addQueen(row,col)){
-		return solveH(col+1);
+	while(col<board.length){
+	    if(col == board.length -1){
+		System.out.println("SOLVED!");
+		return true;
 	    }
-	    if(row == board.length-1){
-		rmvQueen(row,col-1)
-	    row++;
+	    while(row<board.length){
+		if(canPlace(row,col)){
+		    lastrow = row;
+		    return solveH(col+1);
+		}
+		if(row==board.length-1){
+		    rmvQueen(lastrow,col-1);
+		    System.out.println("backtracked");
+		    return solveH(col-1);
+		}
+		row++;
+	    }
+	    col++;
 	}
-	
-    public boolean solve(){
-	
+	System.out.println("NO SOLUTION!");
 	return false;
+    }	
+    public boolean solve(){
+	return solveH(0);
+    }
 }
