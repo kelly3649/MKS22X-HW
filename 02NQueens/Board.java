@@ -25,20 +25,16 @@ public class Board{
 	    System.out.print("\n");
 	}
     }
-    public String symbol(int n){
-	if(n == 1){
-	    return "Q";
-	}
-	else{
-	    return "_";
-	}
-    }
+
     public void printSolution(){
-	String symbol;
-	//solve();
 	for(int i = 0;i<board.length;i++){
 	    for(int index = 0;index<board.length;index++){
-		System.out.println(" " + symbol(board[i][index]) + " ");
+		if(board[i][index] == 1){
+		    System.out.println(" Q ");
+		}
+		else{
+		    System.out.println(" _ ");
+		}
 	    }
 	    System.out.print("\n");
 	}
@@ -68,11 +64,11 @@ public class Board{
 	addQueen(row, col);
 	int i = 0;
 	while(i<board.length){
-	    if(board[i][col+1] == 0){
-		return true;
+	    if(board[i][col+1] != 0){
+		return false;
 	    }
 	}
-	return false;
+	return true;
     }
 	
     public boolean rmvQueen(int row, int col){
@@ -106,7 +102,6 @@ public class Board{
 			System.out.println("SOLVED!");
 			return true;
 		    }
-		    //		    else{rmvQueen(row,col);}
 		}
 		else if(canPlace(row,col)){
 		    lastrow = row;
@@ -114,7 +109,11 @@ public class Board{
 		    return solveH(col+1);
 		}
 		rmvQueen(row,col);
+		System.out.println("removed queen, set board back to normal because canPlace was false");
 		if(row==board.length-1){
+		    if(col == 0){//cannot put anywhere, for example when n ==2
+			return false;
+		    }
 		    rmvQueen(lastrow,col-1);
 		    System.out.println("backtracked");
 		    return solveH(col-1);

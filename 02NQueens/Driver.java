@@ -22,7 +22,9 @@ public class Driver{
 	b1.printBoard();*/
 	b.solve();//works!
 	b.printSolution();
-	//b2.solve();
-	//b3.solve();
+        b2.solve(); //works!
+	b2.printSolution();
+	b3.solve();
+	b3.printSolution();
     }
 }
