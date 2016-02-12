@@ -10,6 +10,7 @@ public class Driver{
 	QueenBoard b = new QueenBoard(1);
 	QueenBoard b2 = new QueenBoard(2);
 	QueenBoard b3 = new QueenBoard(3);
+	QueenBoard b4 = new QueenBoard(4);
 	
 	/*	b1.printBoard();
 	b1.addQueen(0,0);
@@ -26,5 +27,7 @@ public class Driver{
 	b2.printSolution();
 	b3.solve();
 	b3.printSolution();
+	b4.solve();
+	b4.printSolution();
     }
 }

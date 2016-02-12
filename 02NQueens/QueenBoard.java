@@ -30,10 +30,10 @@ public class QueenBoard{
 	for(int i = 0;i<board.length;i++){
 	    for(int index = 0;index<board.length;index++){
 		if(board[i][index] == 1){
-		    System.out.println(" Q ");
+		    System.out.print(" Q ");
 		}
 		else{
-		    System.out.println(" _ ");
+		    System.out.print(" _ ");
 		}
 	    }
 	    System.out.print("\n");
@@ -41,7 +41,7 @@ public class QueenBoard{
     }
     public boolean addQueen(int row, int col){
 	if(board[row][col] != 0){
-	    System.out.println("cannot place Queen there");
+	    //	    System.out.println("cannot place Queen there");
 	    return false;
 	}//that way it cannot add a queen on a negative space
 	board[row][col] = 1; 
@@ -57,7 +57,7 @@ public class QueenBoard{
 	    offset ++;
 	}
 
-	System.out.println("Queen placed!");
+	//System.out.println("Queen placed!");
 	return true;
     }
     public boolean canPlace(int row, int col){ //adds the queen if canPlace
@@ -73,7 +73,7 @@ public class QueenBoard{
 	
     public boolean rmvQueen(int row, int col){
 	if(board[row][col] < 1){
-	    System.out.println("no Queen there to remove");
+	    //  System.out.println("no Queen there to remove");
 	    return false;
 	}
 	board[row][col] = 0; //returning it back to normal
@@ -88,41 +88,22 @@ public class QueenBoard{
 	    }
 	    offset ++;
 	}
-	System.out.println("Queen removed!");
+	//System.out.println("Queen removed!");
 	return true;
     }
     
     public boolean solveH(int col){
-	int row = 0;
-	int lastrow = 0;
-	while(col<board.length){
-	    while(row<board.length){
-		if(col == board.length -1){
-		    if(addQueen(row,col)){
-			System.out.println("SOLVED!");
-			return true;
-		    }
-		}
-		else if(canPlace(row,col)){
-		    lastrow = row;
-		    System.out.println("lastrow = " + lastrow);
-		    return solveH(col+1);
-		}
-		rmvQueen(row,col);
-		System.out.println("removed queen, set board back to normal because canPlace was false");
-		if(row==board.length-1){
-		    if(col == 0){//cannot put anywhere, for example when n ==2
-			return false;
-		    }
-		    rmvQueen(lastrow,col-1);
-		    System.out.println("backtracked");
-		    return solveH(col-1);
-		}
-		row++;
-	    }
-	    col++;
+	if(col >= board.length){
+	    return true;
 	}
-	System.out.println("NO SOLUTION!");
+	for(int i =0;i<board.length;i++){
+	    if(addQueen(i,col) && solveH(col+1)){
+		return true;
+	    }
+	    else{
+		rmvQueen(i,col);
+	    }
+	}
 	return false;
     }	
     public boolean solve(){
