@@ -1,5 +1,5 @@
 public class KnightBoard{
-    public int numMove=1;
+    public int numMove=2;
     public int nextRow,nextCol;
     public int[][] board;
     public KnightBoard(int side){
@@ -31,13 +31,18 @@ public class KnightBoard{
 	    }
 	    System.out.print("\n");
 	}
+	System.out.print("\n");
     }
 	//needs 8 recursive calls
 	//returns true if one of the eight moves works
 	//returns false if all cannot be done
-    public boolean solveH(int row, int col){
+    public boolean solveH(int row, int col){ //needs 3 parameters
+	printBoard();
 	if(numMove == board.length*board.length + 1){
 	    return true;
+	}
+	if(numMove == 1){//since numMove keeps on decr, if it reaches 1, that means there are no ways for it to move to 2
+	    return false;
 	}
 	while(numMove < board.length*board.length){	
 	    if(row>0){
@@ -48,6 +53,8 @@ public class KnightBoard{
 		    nextCol = col-2;
 		    solveH(nextRow,nextCol);
 		}
+
+
 		if(col<board.length-2 && board[row-1][col+2] == 0){
 		    board[row-1][col+2] = numMove;
 		    numMove++;
@@ -104,22 +111,22 @@ public class KnightBoard{
 		    }
 		}
 	    }
-	    //   else{
-	    //	numMove--;
-	    //	board[row][col] = 0;
-	    //}
-	}
+	    board[row][col] = 0;
+	    numMove--;
+	   }
 	return false;
+	
     }
 
 	   		
 	    
     public boolean solve(){
+	board[0][0] = 1; //start at top left corner
 	return solveH(0,0);
 		    
     }
     public static void main(String[]args){
-	KnightBoard b1 =  new KnightBoard(3);
+	KnightBoard b1 =  new KnightBoard(4);
 	b1.solve();
 	b1.printBoard();
     }
