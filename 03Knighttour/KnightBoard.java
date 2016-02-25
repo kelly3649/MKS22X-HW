@@ -38,15 +38,17 @@ public class KnightBoard{
 	//returns false if all cannot be done
     public boolean solveH(int row, int col){ //needs 3 parameters
 	printBoard();
+	//check if on board
+	if(row<0 || row>=board.length || col<0 || col<=board.length){
+	    return false;
+	}
 	if(numMove == board.length*board.length + 1){
 	    return true;
 	}
 	if(numMove == 1){//since numMove keeps on decr, if it reaches 1, that means there are no ways for it to move to 2
 	    return false;
 	}
-	while(numMove < board.length*board.length){	
-	    if(row>0){
-		if(col >= 2 && board[row-1][col-2] == 0){
+	    		if(col >= 2 && board[row-1][col-2] == 0){
 		    board[row-1][col-2] = numMove;
 		    numMove++;
 		    nextRow = row-1;
