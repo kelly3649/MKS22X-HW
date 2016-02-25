@@ -1,5 +1,4 @@
 public class KnightBoard{
-    public int numMove=2;
     public int nextRow,nextCol;
     public int[][] board;
     public KnightBoard(int side){
@@ -36,100 +35,62 @@ public class KnightBoard{
 	//needs 8 recursive calls
 	//returns true if one of the eight moves works
 	//returns false if all cannot be done
-    public boolean solveH(int row, int col){ //needs 3 parameters
-	printBoard();
+    public boolean solveH(int row, int col,int numMove){ //needs 3 parameters
+
 	//check if on board
-	if(row<0 || row>=board.length || col<0 || col<=board.length){
+	if(row<0 || row>=board.length || col<0 || col>=board.length){
+	    print("first if works!");
+	    return false;
+	}//if not a zero, cannot place there
+	if(board[row][col] != 0){
 	    return false;
 	}
-	if(numMove == board.length*board.length + 1){
+	//else just place it down!
+	board[row][col] = numMove;
+	//if last move, you've solved
+	if(numMove == board.length*board.length){
 	    return true;
 	}
-	if(numMove == 1){//since numMove keeps on decr, if it reaches 1, that means there are no ways for it to move to 2
-	    return false;
-	}
-	    		if(col >= 2 && board[row-1][col-2] == 0){
-		    board[row-1][col-2] = numMove;
-		    numMove++;
-		    nextRow = row-1;
-		    nextCol = col-2;
-		    solveH(nextRow,nextCol);
-		}
-
-
-		if(col<board.length-2 && board[row-1][col+2] == 0){
-		    board[row-1][col+2] = numMove;
-		    numMove++;
-		    nextRow = row-1;
-		    nextCol = col+2;
-		    solveH(nextRow,nextCol);
-		}
-		if(row > 1){
-		    if(col >= 1 && board[row-2][col-1] == 0){
-			board[row-2][col-2] = numMove;
-			numMove++;
-			nextRow = row-2;
-			nextCol = col-1;
-			solveH(nextRow,nextCol);
-		    }
-		    if(col < board.length-1 && board[row-2][col+1] == 0){
-			board[row-2][col+1] = numMove;
-			numMove++;
-			nextRow = row-2;
-			nextCol = col+1;
-			solveH(nextRow,nextCol);
-		    }
-		}
-	    }
-	    if(row<board.length-1){
-		if(col >= 2 && board[row+1][col-2] == 0){
-		    board[row+1][col-2] = numMove;
-		    numMove++;
-		    nextRow = row+1;
-		    nextCol = col-2;
-		    solveH(nextRow,nextCol);
-		}
-		if(col<board.length-2 && board[row+1][col+2] == 0){
-		    board[row+1][col+2] = numMove;
-		    numMove++;
-		    nextRow = row+1;
-		    nextCol = col+2;
-		    solveH(nextRow,nextCol);
-		}
-		if(row<board.length-2){
-		    if(col >= 1 && board[row+2][col-1] == 0){
-			board[row+2][col-1] = numMove;
-			numMove++;
-			nextRow = row+2;
-			nextCol = col-1;
-			solveH(nextRow,nextCol);
-		    }
-		    if(col < board.length-1 && board[row+2][col+1] == 0){
-			board[row+2][col+1] = numMove;
-			numMove++;
-			nextRow = row+2;
-			nextCol = col+1;
-			solveH(nextRow,nextCol);
-		    }
-		}
-	    }
-	    board[row][col] = 0;
-	    numMove--;
-	   }
-	return false;
 	
+	if(solveH(row-1,col-2,numMove+1)){
+		return true;
+	}
+	if(solveH(row-1,col+2,numMove+1)){
+	    return true;
+	}
+	if(solveH(row-2, col-1,numMove+1)){
+	    return true;
+	}  
+	if(solveH(row-2,col+1,numMove+1)){
+	    return true;
+	}
+	if(solveH(row+1,col-2,numMove+1)){
+	    return true;
+	}
+	if(solveH(row+1,col+2,numMove+1)){
+		return true;
+	}
+	if(solveH(row+2,col-1,numMove+1)){
+	    return true;
+	}
+	if(solveH(row+2,col+1,numMove+1)){
+	    return true;
+	}
+	else{
+    board[row][col] = 0;
+    return false;
+	}	
     }
 
 	   		
 	    
     public boolean solve(){
-	board[0][0] = 1; //start at top left corner
-	return solveH(0,0);
+	return solveH(0,0,1);
 		    
     }
     public static void main(String[]args){
-	KnightBoard b1 =  new KnightBoard(4);
-	b1.solve();
+	KnightBoard b1 =  new KnightBoard(3);
+	System.out.println(b1.solve());
 	b1.printBoard();
     }
 }
