@@ -29,7 +29,7 @@ public class KnightBoard{
     public void printBoard(){
 	for(int i = 0;i<board.length;i++){
 	    for(int index = 0;index<board[0].length;index++){
-		if(board.length*board[0].length >= 10){
+		if(board.length*board[0].length >= 10 && board[i][index] < 10){
 		System.out.print(" _" + board[i][index] + " ");
 		}
 		else{
@@ -97,15 +97,18 @@ public class KnightBoard{
 		    
     }
     public static void main(String[]args){
-	KnightBoard b1 =  new KnightBoard(3);
+	KnightBoard b1 =  new KnightBoard(4);
 	System.out.println(b1.solve());
 	b1.printBoard();
-        KnightBoard b2 =  new KnightBoard(7);
+        KnightBoard b2 =  new KnightBoard(2);
 	System.out.println(b2.solve());
 	b2.printBoard();
-	KnightBoard b3 =  new KnightBoard(8);
+	KnightBoard b3 =  new KnightBoard(1);
 	System.out.println(b3.solve());
 	b3.printBoard();
+	KnightBoard b4 =  new KnightBoard(3,7);
+	System.out.println(b4.solve());
+	b4.printBoard();
 	
     }
 }
