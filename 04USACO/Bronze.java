@@ -8,18 +8,19 @@ public class Bronze{
     int numDir; // number of directions(N)
     int[][] landscape;
     int[] R_s,C_s,D_s;
+    File file = new File(fileName);
+    try{
+	Scanner sc = new Scanner(new File("makelake.in"));
+	while(sc.hasNext()){
+	    input += sc.next();
+	}
+    }
     numRow = Integer.parseInt(input.substring(0,1));
     numCol = Integer.parseInt(input.substring(1,2));
     landscape = new int[numRow][numCol];
 
     public Bronze(String fileName){
-	File file = new File(fileName);
-	try{
-	   Scanner sc = new Scanner(new File("makelake.in"))){
-	while(sc.hasNext()){
-	    input += sc.next();
-	}
-    }	
+	
     }
     public void stomp(){
     }
