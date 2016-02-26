@@ -20,15 +20,20 @@ public class Bronze{
 	String input = "";
 	try{
 	    Scanner sc = new Scanner(new File("makelake.in"));
+	 
 	    while(sc.hasNextLine()){
+		
 		input += sc.nextLine() + "\n";
+		    numRow = Integer.parseInt(input.substring(0,1));
+		    numCol = Integer.parseInt(input.substring(2,3));		
+
 	    }
 	}catch(FileNotFoundException e){
 	    System.out.println("NO FILE FOUND");
 	}
 
 	System.out.print(input);
-    //numRow = Integer.parseInt(input.substring(0,1));
+	//numRow = Integer.parseInt(input.substring(0,1));
     //numCol = Integer.parseInt(input.substring(1,2));
     //landscape = new int[numRow][numCol];
 	/*	for(int i = 0; i<numRow;i++){
