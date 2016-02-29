@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 public class Bronze{
@@ -8,37 +8,44 @@ public class Bronze{
 
     
     public static String solve(){
-	int numRow=0,numCol=0; //(R,C)
-	int elevation;//(E)
-	int numDir; // number of directions(N)
-	int[][] landscape;
-	int[] R_s,C_s,D_s;
+	int numRow=1,numCol=1; //(R,C)
+	int elevation=0;//(E)
+	int numDir=0; // number of directions(N)
+	int[][] landscape = new int[numRow][numCol];
+	ArrayList<Integer> R_s = new ArrayList<Integer>()
+	    ,C_s= new ArrayList<Integer>(),
+	    D_s= new ArrayList<Integer>(); //easier to be ArrayList bc can add onto later
 	String input = "";
 	try{
 	    Scanner sc = new Scanner(new File("makelake.in"));
-	 
-	    while(sc.hasNextLine()){
-		
-		input += sc.nextLine() + "\n";
-		    numRow = Integer.parseInt(input.substring(0,1));
-		    numCol = Integer.parseInt(input.substring(2,3));
-		    elevation = Integer.parseInt(input.substring(4,5));		
-		    numDir = Integer.parseInt(input.substring(6,7));		
+	    numRow = sc.nextInt();
+	    numCol = sc.nextInt();
+	    elevation = sc.nextInt();
+	    numDir = sc.nextInt();;
+	    landscape = new int[numRow][numCol];
+	    for(int i = 0; i<numRow;i++){
+		for(int index = 0;index<numCol;index++){
+		    landscape[i][index] = sc.nextInt();
+		    //System.out.print(landscape[i][index] + " ");
+		}
+		//System.out.print("\n");
+	    }			     
+	    for(int i = 0;i<numDir;i++){
+		while(sc.hasNextInt()){
+		    R_s.add(sc.nextInt());
+		    C_s.add(sc.nextInt());
+		    D_s.add(sc.nextInt()); //how much you push it down
+		}
+		i++;
 	    }
+
+	    
 	}catch(FileNotFoundException e){
 	    System.out.println("NO FILE FOUND");
 	}
 	int vol = 0;
-	/*landscape = new int[numRow][numCol];
-	for(int i = 0; i<numRow;i++){
-	    for(int index = 0;index<numCol;index++){
-		System.out.print(landscape[i][index]);
-	    }
-	    System.out.print("\n");
-	}
 	
-	*/
-	return "" + vol + ",7,Wang,Kelly"; 
+	return "" + vol + ",7,Wang,Kelly" + numRow + numCol + elevation + numDir + input; 
     }
     
 
