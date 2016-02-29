@@ -1,11 +1,8 @@
 import java.util.*;
+import java.lang.Math;
 import java.io.File;
 import java.io.FileNotFoundException;
-public class Bronze{
-    
-    
-    
-
+public class Bronze{    
     
     public static String solve(){
 	int numRow=1,numCol=1; //(R,C)
@@ -38,18 +35,28 @@ public class Bronze{
 		i++;
 	    }
 	}catch(FileNotFoundException e){
-	    System.out.println("NO FILE FOUND");
+	    System.out.println("FILE NOT FOUND");
 	}
 	int dir = 0; //the direction you're following RN
 	while(dir < numDir){
+	    int max=0;
 	    for(int i = R_s.get(dir)-1;i<numRow && i<R_s.get(dir)+2;i++){
 		for(int index = C_s.get(dir)-1;index<numCol && index<C_s.get(dir)+2;index++){
-		    landscape[i][index] -= D_s.get(dir);
-		    System.out.print(index + ": " + landscape[i][index] + " ");
+		    max=Math.max(max,landscape[i][index]); //there is a new max every dir
 		}
-		System.out.print("\n");
 	    }
-	    System.out.println("^DIR#" + dir);
+	    max-=D_s.get(dir);
+	    for(int i = R_s.get(dir)-1;i<numRow && i<R_s.get(dir)+2;i++){
+		for(int index = C_s.get(dir)-1;index<numCol && index<C_s.get(dir)+2;index++){
+		    if(landscape[i][index] > max){//if it was < but is > aftr the stomp
+			landscape[i][index] = max; //make it equal 
+ 
+		    }
+		    //		    System.out.print(index + ": " + landscape[i][index] + " ");
+		}
+		//	System.out.print("\n");
+	    }
+	    // System.out.println("^DIR#" + dir);
 	    dir++;
 	}
 	int ttlDepth = 0;
@@ -62,9 +69,9 @@ public class Bronze{
 		}
 	    }
 	}
-	System.out.println("depth: " + ttlDepth); //should be 66
+	//System.out.println("depth: " + ttlDepth); //should be 66
 	int vol = ttlDepth * 72 * 72; //dimensions are 6ft by 6ft
-	return "" + vol + ",7,Wang,Kelly" + numRow + numCol + elevation + numDir + input; 
+	return "" + vol + ",7,Wang,Kelly"; 
     }
     
 
