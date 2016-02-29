@@ -26,9 +26,8 @@ public class Bronze{
 	    for(int i = 0; i<numRow;i++){
 		for(int index = 0;index<numCol;index++){
 		    landscape[i][index] = sc.nextInt();
-		    //System.out.print(landscape[i][index] + " ");
 		}
-		//System.out.print("\n");
+		
 	    }			     
 	    for(int i = 0;i<numDir;i++){
 		while(sc.hasNextInt()){
@@ -38,11 +37,22 @@ public class Bronze{
 		}
 		i++;
 	    }
-
-	    
 	}catch(FileNotFoundException e){
 	    System.out.println("NO FILE FOUND");
 	}
+	int dir = 0; //the direction you're following RN
+	while(dir < numDir){
+	    for(int i = R_s.get(dir);i>numRow-1 || i<R_s.get(dir)+3;i++){
+		for(int index = C_s.get(dir);index>numCol-1 || index<C_s.get(dir)+3;index++){
+		    landscape[i][index] -= D_s.get(dir);
+		    System.out.print(index + ": " + landscape[i][index] + " ");
+		}
+		System.out.print("\n");
+	    }
+	    System.out.println("^DIR#" + dir);
+	    dir++;
+	}
+	
 	int vol = 0;
 	
 	return "" + vol + ",7,Wang,Kelly" + numRow + numCol + elevation + numDir + input; 
