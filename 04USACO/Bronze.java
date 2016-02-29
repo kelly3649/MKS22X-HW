@@ -7,11 +7,7 @@ public class Bronze{
     
 
     
-    public void solve(){
-    }
-    
-
-    public static void main(String[]args){
+    public static String solve(){
 	int numRow=0,numCol=0; //(R,C)
 	int elevation;//(E)
 	int numDir; // number of directions(N)
@@ -25,18 +21,16 @@ public class Bronze{
 		
 		input += sc.nextLine() + "\n";
 		    numRow = Integer.parseInt(input.substring(0,1));
-		    numCol = Integer.parseInt(input.substring(2,3));		
-
+		    numCol = Integer.parseInt(input.substring(2,3));
+		    elevation = Integer.parseInt(input.substring(4,5));		
+		    numDir = Integer.parseInt(input.substring(6,7));		
 	    }
 	}catch(FileNotFoundException e){
 	    System.out.println("NO FILE FOUND");
 	}
-
-	System.out.print(input);
-	//numRow = Integer.parseInt(input.substring(0,1));
-    //numCol = Integer.parseInt(input.substring(1,2));
-    //landscape = new int[numRow][numCol];
-	/*	for(int i = 0; i<numRow;i++){
+	int vol = 0;
+	/*landscape = new int[numRow][numCol];
+	for(int i = 0; i<numRow;i++){
 	    for(int index = 0;index<numCol;index++){
 		System.out.print(landscape[i][index]);
 	    }
@@ -44,6 +38,15 @@ public class Bronze{
 	}
 	
 	*/
+	return "" + vol + ",7,Wang,Kelly"; 
+    }
+    
+
+    public static void main(String[]args){
+
+
+	System.out.println(solve());
+	
 	
 	//b1.printBoard();
     }
