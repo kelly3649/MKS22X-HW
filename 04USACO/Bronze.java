@@ -42,12 +42,9 @@ public class Bronze{
 	}
 	int dir = 0; //the direction you're following RN
 	while(dir < numDir){
-	    for(int i = R_s.get(dir);i<numRow && i<R_s.get(dir)+3;i++){
-		for(int index = C_s.get(dir);index<numCol && index<C_s.get(dir)+3;index++){
+	    for(int i = R_s.get(dir)-1;i<numRow && i<R_s.get(dir)+2;i++){
+		for(int index = C_s.get(dir)-1;index<numCol && index<C_s.get(dir)+2;index++){
 		    landscape[i][index] -= D_s.get(dir);
-		    if(dir == numDir-1){
-			landscape[i][index] = elevation - landscape[i][index];
-		    }//if last instr, go onto next step, final val:depth undrwtr
 		    System.out.print(index + ": " + landscape[i][index] + " ");
 		}
 		System.out.print("\n");
@@ -55,11 +52,18 @@ public class Bronze{
 	    System.out.println("^DIR#" + dir);
 	    dir++;
 	}
+	int ttlDepth = 0;
 	//last for loop set
-	//for(int i = 0;i<numRow;i++){
-	    
-	int vol = 0;
-	
+	for(int i = 0;i<numRow;i++){
+	    for(int index = 0;index<numCol;index++){
+		landscape[i][index] = elevation - landscape[i][index];
+		if(landscape[i][index] > 0){ //neg values would still b abv land
+		    ttlDepth += landscape[i][index];
+		}
+	    }
+	}
+	System.out.println("depth: " + ttlDepth); //should be 66
+	int vol = ttlDepth * 72 * 72; //dimensions are 6ft by 6ft
 	return "" + vol + ",7,Wang,Kelly" + numRow + numCol + elevation + numDir + input; 
     }
     
