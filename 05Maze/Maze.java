@@ -20,6 +20,9 @@ public class Maze{
       3. When the file is not found, print an error and exit the program.
     */
     public Maze(String filename, boolean ani){
+	animate = ani;
+	try{ Scanner in = 
+
         //COMPLETE CONSTRUCTOR
     }
 
@@ -29,6 +32,28 @@ public class Maze{
       Things to note:
        When no S is contained in maze, print an error and return false.
     */
+    public boolean solveH(int row, int col){
+	if(maze[row][col] != ' '){
+	    return false;
+	}
+	maze[row][col] = '@';
+	if(solveH([row+1][col])){
+		return true;
+	}
+	if(solveH([row-1][col])){
+	    return true;
+	}
+	if(solveH([row][col+1])){
+		return true;
+	}
+	if(solveH([row][col-1])){
+	    return true;
+	}
+	else{
+	    maze[row][col] = '.';
+	    return false;
+	}
+    }
     public boolean solve(){
         if(startx < 0){
             System.out.println("No starting point 'S' found in maze.");
