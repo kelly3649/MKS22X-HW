@@ -61,8 +61,7 @@ public class Maze{
         }else{
 	    System.out.println("row/col/startx/starty: " + maze.length + "/" + maze[0].length + "/" + startx + "/" + starty);
             maze[startx][starty] = ' ';
-	    return true;
-            //return solve(startx,starty);
+            return solve(startx,starty);
         }
     }
 
@@ -120,8 +119,16 @@ public class Maze{
         System.out.println(CLEAR_SCREEN);
     }
 
-
     public String toString(){
+	String retString = "";
+	for(int i = 0;i<maze.length;i++){
+	    for(int index = 0;index<maze[0].length;index++){
+		retString += maze[i][index];
+	    }retString += "\n";
+	}
+	return retString;
+    }
+    public String oldtoString(){
         int maxx = maze.length;
         int maxy = maze[0].length;
         String ans = "";
