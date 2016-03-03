@@ -59,7 +59,7 @@ public class Maze{
             System.out.println("No starting point 'S' found in maze.");
             return false;
         }else{
-	    System.out.println("row/col/startx/starty: " + maze.length + "/" + maze[0].length + "/" + startx + "/" + starty);
+	    //	    System.out.println("row/col/startx/starty: " + maze.length + "/" + maze[0].length + "/" + startx + "/" + starty);
             maze[startx][starty] = ' ';
             return solve(startx,starty);
         }
@@ -119,7 +119,7 @@ public class Maze{
         System.out.println(CLEAR_SCREEN);
     }
 
-    public String toString(){
+    /*  public String toString(){
 	String retString = "";
 	for(int i = 0;i<maze.length;i++){
 	    for(int index = 0;index<maze[0].length;index++){
@@ -127,8 +127,8 @@ public class Maze{
 	    }retString += "\n";
 	}
 	return retString;
-    }
-    public String oldtoString(){
+	}*/
+    public String toString(){
         int maxx = maze.length;
         int maxy = maze[0].length;
         String ans = "";
