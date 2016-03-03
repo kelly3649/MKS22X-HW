@@ -21,46 +21,48 @@ public class Maze{
     */
     public Maze(String filename, boolean ani){
 	animate = ani;
-	try{ Scanner in = 
-
+	startx = -1;//
+	starty = -1;//if no start found
+	ArrayList<String> MazeList = new ArrayList<String>();
+	try{ Scanner sc = new Scanner(new File(filename));
+	    
+	    while(sc.hasNextLine()){
+		MazeList.add(sc.nextLine());
+	    }
+	    int row = MazeList.size();
+	    int col = MazeList.get(0).length();
+	    maze = new char[row][col];
+	    for(int i = 0;i<row;i++){
+		for(int index = 0;index<col;index++){
+		    if(MazeList.get(i).charAt(index)== 'S'){
+			startx = i;
+			starty = index;
+		    }
+		    maze[i][index] = MazeList.get(i).charAt(index);
+		}
+	    }
+	}catch(FileNotFoundException e){
+	    System.out.println("FILE NOT FOUND");
+	}
+	
         //COMPLETE CONSTRUCTOR
     }
 
-
+    
     /*Main Solve Function
 
       Things to note:
        When no S is contained in maze, print an error and return false.
     */
-    public boolean solveH(int row, int col){
-	if(maze[row][col] != ' '){
-	    return false;
-	}
-	maze[row][col] = '@';
-	if(solveH([row+1][col])){
-		return true;
-	}
-	if(solveH([row-1][col])){
-	    return true;
-	}
-	if(solveH([row][col+1])){
-		return true;
-	}
-	if(solveH([row][col-1])){
-	    return true;
-	}
-	else{
-	    maze[row][col] = '.';
-	    return false;
-	}
-    }
     public boolean solve(){
         if(startx < 0){
             System.out.println("No starting point 'S' found in maze.");
             return false;
         }else{
+	    System.out.println("row/col/startx/starty: " + maze.length + "/" + maze[0].length + "/" + startx + "/" + starty);
             maze[startx][starty] = ' ';
-            return solve(startx,starty);
+	    return true;
+            //return solve(startx,starty);
         }
     }
 
@@ -83,10 +85,30 @@ public class Maze{
             System.out.println(this);
             wait(20);
         }
-
+	if(maze[x][y] == 'E'){
+	    return true;
+	}
+	if(maze[x][y] != ' '){
+	    return false;
+	}
+	maze[x][y] = '@';
+	if(solve(x+1,y)){
+		return true;
+	}
+	if(solve(x-1,y)){
+	    return true;
+	}
+	if(solve(x,y+1)){
+		return true;
+	}
+	if(solve(x,y-1)){
+	    return true;
+	}
+	else{
+	    maze[x][y] = '.';
+	    return false;
+	}
         //COMPLETE SOLVE
-
-        return false; //so it compiles
     }
 
 
