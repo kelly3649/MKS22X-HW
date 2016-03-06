@@ -91,10 +91,10 @@ public class Silver{
     
     public static void main(String[]args){
 	Silver s1 = new Silver("data1.dat");
-	System.out.println(s1);
+	//	System.out.println(s1);
 	System.out.println(s1.solve());
 	Silver s2 = new Silver("data2.dat");
-	System.out.println(s2);
+	//System.out.println(s2);
 	System.out.println(s2.solve());
     }
 }
