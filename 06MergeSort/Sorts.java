@@ -50,6 +50,41 @@ public class Sorts{
 	    }printArray(data);
 	}
     }
+    public void merge(int[] data, int startA, int endA, int startB, int endB){
+	int[] halfA = new int[endA-startA+1];
+	int[] halfB = new int[endB-startB+1];
+	ArrayList<Integer> newList = new ArrayList<Integer>();
+	int cntrA = 0;
+	int cntrB =0;
+	while(cntrA < halfA.length && cntrB<halfB.length){
+	    if(halfA[cntrA] <= halfB[cntrB]){
+		newList.add(halfA[cntrA]);
+		cntrA++;
+	    }
+	    else{
+		newList.add(halfB[cntrB]);
+		cntrB++;
+	    }
+	}
+	if(cntrA == halfA.length()){
+	    for(int i = cntrB;i<halfB.length;i++){
+		newList.add(halfB[i]);
+	    }
+	}
+	else{for(int i = cntrA;i<halfA.length;i++){
+		newList.add(halfA[i]);
+	    }
+	}
+	//copy it over
+	for(int i = 0;i<newList.size();i++){
+	    data[i] = newList.get(i);
+	}
+    }
+    public static void mergeSortH(int[] data,int start, int end){
+    }
+    public static void mergeSort(int[] data){
+	 mergeSortHelper(data,0,data.length-1);
+    }
     public static void main(String[]args){
 	int[] ary = {0,1,-12,4,5,2,-1};
 	bubbleSort(ary);
