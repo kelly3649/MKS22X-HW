@@ -52,7 +52,7 @@ public class Sorts{
 	    }printArray(data);
 	}
     }
-    public static void merge(int[] data, int startA, int endA, int startB, int endB){
+    public static void merge(int[] data, int startA, int endA, int startB, int endB){//System.out.println("endB/startB" + endB + "/" + startB);
 	int[] halfA = new int[endA-startA+1];
 	for(int i = 0;i<halfA.length;i++){
 	    halfA[i] = data[i];
@@ -64,8 +64,9 @@ public class Sorts{
 	else{
 	    halfB = new int[endB-startB+1];
 	}
-	System.out.println("data.length/halfB.length" + data.length + "/" + halfB.length);
+	//System.out.println("data.length/halfB.length" + data.length + "/" + halfB.length);
 	for(int i = 0;i<halfB.length;i++){
+	    //    System.out.println("i + halfB.length = " + i + halfB.length);
 	    halfB[i] = data[i+halfB.length];
 	}
 	ArrayList<Integer> newList = new ArrayList<Integer>();
@@ -93,13 +94,14 @@ public class Sorts{
 	//copy it over
 	if(newList.size() > 0){
 	    for(int i = 0;i<newList.size();i++){
-		System.out.println(newList.get(i));
+		//		System.out.println(newList.get(i));
 		data[i] = newList.get(i);
 	    }
 	}
     }
 
     public static void mergeSortH(int[] data,int start, int end){
+	System.out.println("data length is" + data.length + "start/end" + start + "/" + end);
 	int[] halfA = new int[data.length/2];
 	int[] halfB = new int[data.length-halfA.length];
 	for(int i = 0;i<halfA.length;i++){
@@ -110,10 +112,10 @@ public class Sorts{
 	}
 	while(halfA.length + halfB.length > 2){
 	    mergeSortH(halfA,start,end/2);
-	    mergeSortH(halfB,end/2+1,end);
+	    mergeSortH(halfB,end/2,end);
 	}
 	if(data.length == 1){
-	    merge(data,start,end/2,end/2,end);
+	    merge(data,start,end/2,end/2,end-1);
 	}
 	else{
 	merge(data,start,end/2,end/2+1,end);
@@ -123,7 +125,7 @@ public class Sorts{
 	 mergeSortH(data,0,data.length-1);
     }
     public static void main(String[]args){
-	int[] ary = {0,1,-12,4,5,2};
+	int[] ary = {0,1,-12,4};
 	mergeSort(ary);
 	printArray(ary);
 	int[] arey = {-1,3,-2,-2,-2};
