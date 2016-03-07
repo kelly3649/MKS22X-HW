@@ -1,3 +1,5 @@
+import java.util.*;
+import java.io.*;
 public class Sorts{
 
     public static void printArray(int[] data){
@@ -50,9 +52,22 @@ public class Sorts{
 	    }printArray(data);
 	}
     }
-    public void merge(int[] data, int startA, int endA, int startB, int endB){
+    public static void merge(int[] data, int startA, int endA, int startB, int endB){
 	int[] halfA = new int[endA-startA+1];
-	int[] halfB = new int[endB-startB+1];
+	for(int i = 0;i<halfA.length;i++){
+	    halfA[i] = data[i];
+	}
+	int[] halfB;	
+	if(data.length == 1){
+	   halfB = new int[endB-startB];
+	}
+	else{
+	    halfB = new int[endB-startB+1];
+	}
+	System.out.println("data.length/halfB.length" + data.length + "/" + halfB.length);
+	for(int i = 0;i<halfB.length;i++){
+	    halfB[i] = data[i+halfB.length];
+	}
 	ArrayList<Integer> newList = new ArrayList<Integer>();
 	int cntrA = 0;
 	int cntrB =0;
@@ -66,7 +81,7 @@ public class Sorts{
 		cntrB++;
 	    }
 	}
-	if(cntrA == halfA.length()){
+	if(cntrA == halfA.length){
 	    for(int i = cntrB;i<halfB.length;i++){
 		newList.add(halfB[i]);
 	    }
@@ -76,22 +91,45 @@ public class Sorts{
 	    }
 	}
 	//copy it over
-	for(int i = 0;i<newList.size();i++){
-	    data[i] = newList.get(i);
+	if(newList.size() > 0){
+	    for(int i = 0;i<newList.size();i++){
+		System.out.println(newList.get(i));
+		data[i] = newList.get(i);
+	    }
 	}
     }
+
     public static void mergeSortH(int[] data,int start, int end){
+	int[] halfA = new int[data.length/2];
+	int[] halfB = new int[data.length-halfA.length];
+	for(int i = 0;i<halfA.length;i++){
+	    halfA[i] = data[i];
+	}
+	for(int i = data.length/2;i<halfB.length;i++){
+	    halfB[i] = data[i];
+	}
+	while(halfA.length + halfB.length > 2){
+	    mergeSortH(halfA,start,end/2);
+	    mergeSortH(halfB,end/2+1,end);
+	}
+	if(data.length == 1){
+	    merge(data,start,end/2,end/2,end);
+	}
+	else{
+	merge(data,start,end/2,end/2+1,end);
+	}
     }
     public static void mergeSort(int[] data){
-	 mergeSortHelper(data,0,data.length-1);
+	 mergeSortH(data,0,data.length-1);
     }
     public static void main(String[]args){
-	int[] ary = {0,1,-12,4,5,2,-1};
-	bubbleSort(ary);
+	int[] ary = {0,1,-12,4,5,2};
+	mergeSort(ary);
 	printArray(ary);
 	int[] arey = {-1,3,-2,-2,-2};
-	bubbleSort(arey);
+	//mergeSort(arey);
 	printArray(arey);
+	//	System.out.println(1/2);
     }
 }
 
