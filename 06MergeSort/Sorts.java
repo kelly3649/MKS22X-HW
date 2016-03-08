@@ -52,7 +52,7 @@ public class Sorts{
 	    }printArray(data);
 	}
     }
-    public static void merge(int[] data, int startA, int endA, int startB, int endB){//System.out.println("endB/startB" + endB + "/" + startB);
+    public static void merge(int[] data, int startA, int endA, int startB, int endB){System.out.println("endB/startB" + endB + "/" + startB);
 	int[] halfA = new int[endA-startA+1];
 	for(int i = 0;i<halfA.length;i++){
 	    halfA[i] = data[i];
@@ -64,9 +64,7 @@ public class Sorts{
 	else{
 	    halfB = new int[endB-startB+1];
 	}
-	//System.out.println("data.length/halfB.length" + data.length + "/" + halfB.length);
 	for(int i = 0;i<halfB.length;i++){
-	    //    System.out.println("i + halfB.length = " + i + halfB.length);
 	    halfB[i] = data[i+halfB.length];
 	}
 	ArrayList<Integer> newList = new ArrayList<Integer>();
@@ -98,38 +96,40 @@ public class Sorts{
 		data[i] = newList.get(i);
 	    }
 	}
+	printArray(data);
     }
 
-    public static void mergeSortH(int[] data,int start, int end){
-	System.out.println("data length is" + data.length + "start/end" + start + "/" + end);
-	int[] halfA = new int[data.length/2];
-	int[] halfB = new int[data.length-halfA.length];
-	for(int i = 0;i<halfA.length;i++){
-	    halfA[i] = data[i];
+    public static void mergesortH(int[] data,int start, int end){
+	if(end-start > 1){
+	mergesortH(data,start,end/2);
+	mergesortH(data,end/2+1,end);
 	}
-	for(int i = data.length/2;i<halfB.length;i++){
-	    halfB[i] = data[i];
-	}
-	while(halfA.length + halfB.length > 2){
-	    mergeSortH(halfA,start,end/2);
-	    mergeSortH(halfB,end/2,end);
-	}
-	if(data.length == 1){
-	    merge(data,start,end/2,end/2,end-1);
-	}
-	else{
-	merge(data,start,end/2,end/2+1,end);
-	}
+	//if(end-start == 0){
+	merge(data,start,(start + end)/2,(start+end)/2+1,end);
+	//}
+    //else{
+    //	    merge(data,start,start + (end-start)/2,start + (end-start)/2 + 1,end);
+       
+	//System.out.println("data length is" + data.length + "start/end" + start + "/" + end);
+	
     }
-    public static void mergeSort(int[] data){
-	 mergeSortH(data,0,data.length-1);
+
+    public static String name(){
+	return "7,Wang,Kelly";
+    }
+    public static void mergesort(int[] data){
+	 mergesortH(data,0,data.length-1);
     }
     public static void main(String[]args){
-	int[] ary = {0,1,-12,4};
-	mergeSort(ary);
+	System.out.println(name());
+	int[] ary = {0,1,-3,4};
+	int[] ary2 = {-5,2,5,6};
+	//	merge(ary,0,1,2,3);
+	
+	//	mergesort(ary);
 	printArray(ary);
-	int[] arey = {-1,3,-2,-2,-2};
-	//mergeSort(arey);
+	int[] arey = {-1,-3,-2,-2,-2,5,10,1};
+	mergesort(arey);
 	printArray(arey);
 	//	System.out.println(1/2);
     }
