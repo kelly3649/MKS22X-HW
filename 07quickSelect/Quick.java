@@ -77,9 +77,10 @@ public class Quick{
 	int[] ary = {20,15,9,-2,6,7};
 	//System.out.println(partition(ary,0,ary.length-1));
 	//printArray(ary);
-	System.out.println(quickselect(ary,5));
+	//System.out.println(quickselect(ary,5));
 	int[] ary2 = {2,15,9,9,-2,-4,6,20};
 	//System.out.println(partition(ary2,0,ary2.length-1));
 	//printArray(ary2);
+	System.out.println(quickselect(ary2,0));
     }
 }
