@@ -5,16 +5,16 @@ public class Quick{
 	Random r = new Random();
 	int aIndex = r.nextInt(right-left+1) + left;
 	int a = data[aIndex];
-	System.out.println("a/index" + a +"/" + aIndex);
+	//System.out.println("a/index" + a +"/" + aIndex);
 	int strtR = right;
 	//put "a" in corner, like a problem child
 	int copy = data[strtR];
 	data[strtR] = a;
 	data[aIndex] = copy;
-	printArray(data);
+	//printArray(data);
 	right--;
 	while(left!= right){
-	    System.out.println("left/right" + left +"/" + right);
+	    //System.out.println("left/right" + left +"/" + right);
 	    if(data[left] <= a){
 		left++;
 	    }
@@ -24,22 +24,22 @@ public class Quick{
 		data[right] = temp;
 		right--;
 	    }
-	    printArray(data);
-	    System.out.println("left/right" + left + "/" + right);
+	    //printArray(data);
+	    //	    System.out.println("left/right" + left + "/" + right);
 	}
 	//place "a" back, but remember to check that what it swapped with
 	if(data[left] < a){
 	    int temp2 = data[left+1];
 	    data[left+1] = a;
 	    data[strtR] = temp2;
-	    printArray(data);
+	    //printArray(data);
 	    return left+1;
 	}
 	else{
 	    int temp3 = data[left];
 	    data[left] = a;
 	    data[strtR] = temp3;
-	    printArray(data);
+	    //  printArray(data);
 	    return left;
 	}		
     }
