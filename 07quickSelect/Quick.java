@@ -63,6 +63,13 @@ public class Quick{
 	    }
 	}
     }
+    public static void quickSort(int[] data){
+	quickSort(data,0,data.length-1);
+    }
+    private static void quickSort(int[] data, int left, int right){
+	partition(data,left,right);
+
+    }
     public static void printArray(int[] data){
 	String retString = "[";
 	int i = 0;
