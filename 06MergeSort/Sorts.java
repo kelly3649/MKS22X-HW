@@ -59,16 +59,24 @@ public class Sorts{
 	int cntrB = startB;
 	int i = 0;
 	while(i<endB-startA+1){
-	    if(data[cntrA] <= data[cntrB]){
+	    if(cntrA == endA+1){
+		newAry[i+startA] = data[cntrB];
+		cntrB++;
+	    }
+	    else if(cntrB == endB + 1){
 		newAry[i+startA] = data[cntrA];
 		cntrA++;
-		
+	    }
+	    
+	    else if(data[cntrA] <= data[cntrB]){
+		newAry[i+startA] = data[cntrA];
+		cntrA++;
 	    }
 	    else{
 		newAry[i+startA] = data[cntrB];
 		cntrB++;
-		
 	    }
+	    printArray(newAry);
 	    i++;
 	}
 	/*if(cntrA == endA+1){
