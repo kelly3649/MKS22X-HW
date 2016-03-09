@@ -52,64 +52,53 @@ public class Sorts{
 	    }printArray(data);
 	}
     }
-    public static void merge(int[] data, int startA, int endA, int startB, int endB){System.out.println("endB/startB" + endB + "/" + startB);
-	int[] halfA = new int[endA-startA+1];
-	for(int i = 0;i<halfA.length;i++){
-	    halfA[i] = data[i];
-	}
-	int[] halfB;	
-	if(data.length == 1){
-	   halfB = new int[endB-startB];
-	}
-	else{
-	    halfB = new int[endB-startB+1];
-	}
-	for(int i = 0;i<halfB.length;i++){
-	    halfB[i] = data[i+halfB.length];
-	}
-	ArrayList<Integer> newList = new ArrayList<Integer>();
-	int cntrA = 0;
-	int cntrB =0;
-	while(cntrA < halfA.length && cntrB<halfB.length){
-	    if(halfA[cntrA] <= halfB[cntrB]){
-		newList.add(halfA[cntrA]);
+    public static void merge(int[] data, int startA, int endA, int startB, int endB){System.out.println("endB/startB" + endB + "/" + startB + endA + "/" + startA);
+	
+	int[] newAry = new int[data.length];
+	int cntrA = startA;
+	int cntrB = startB;
+	int i = 0;
+	while(i<endB-startA+1){
+	    if(data[cntrA] <= data[cntrB]){
+		newAry[i+startA] = data[cntrA];
 		cntrA++;
+		
 	    }
 	    else{
-		newList.add(halfB[cntrB]);
+		newAry[i+startA] = data[cntrB];
 		cntrB++;
+		
+	    }
+	    i++;
+	}
+	/*if(cntrA == endA+1){
+	    for(int i = cntrB;i<endB+1;i++){
+		newAry[i] = data[i];
 	    }
 	}
-	if(cntrA == halfA.length){
-	    for(int i = cntrB;i<halfB.length;i++){
-		newList.add(halfB[i]);
+	else{for(int i = cntrA;i<endA+1;i++){
+		newAry[i] = data[i];
 	    }
-	}
-	else{for(int i = cntrA;i<halfA.length;i++){
-		newList.add(halfA[i]);
-	    }
-	}
+	    }*/
 	//copy it over
-	if(newList.size() > 0){
-	    for(int i = 0;i<newList.size();i++){
+	printArray(newAry);
+	for(int index = startA;index<endB+1;index++){
 		//		System.out.println(newList.get(i));
-		data[i] = newList.get(i);
-	    }
+	    data[index] = newAry[index];
 	}
 	printArray(data);
     }
 
     public static void mergesortH(int[] data,int start, int end){
-	if(end-start > 1){
-	mergesortH(data,start,end/2);
-	mergesortH(data,end/2+1,end);
+	if(end==start){
+	    return; //stops the function
 	}
-	//if(end-start == 0){
-	merge(data,start,(start + end)/2,(start+end)/2+1,end);
-	//}
-    //else{
-    //	    merge(data,start,start + (end-start)/2,start + (end-start)/2 + 1,end);
-       
+	else{
+	    mergesortH(data,start,start + (end-start)/2);
+	    mergesortH(data,1 + start + (end-start)/2,end);
+	    merge(data,start,start + (end-start)/2,1 + start + (end-start)/2,end);
+	}
+
 	//System.out.println("data length is" + data.length + "start/end" + start + "/" + end);
 	
     }
@@ -124,13 +113,14 @@ public class Sorts{
 	System.out.println(name());
 	int[] ary = {0,1,-3,4};
 	int[] ary2 = {-5,2,5,6};
-	//	merge(ary,0,1,2,3);
+		merge(ary2,0,1,2,3);
 	
 	//	mergesort(ary);
-	printArray(ary);
+	printArray(ary2);
 	int[] arey = {-1,-3,-2,-2,-2,5,10,1};
-	mergesort(arey);
-	printArray(arey);
+	int[] arey2 = {-5,3,1,4,6,-1};
+	mergesort(arey2);
+	printArray(arey2);
 	//	System.out.println(1/2);
     }
 }
