@@ -36,22 +36,32 @@ public class Quick{
 	    return left+1;
 	}
 	else{
+	    int temp3 = data[left];
 	    data[left] = a;
-	    //	    if(right != strtR){	
-		data[strtR] = copy;
-		printArray(data);
-		return left;
-		//  }
-	}
-	
-	
+	    data[strtR] = temp3;
+	    printArray(data);
+	    return left;
+	}		
     }
     public static int quickselect(int[] data, int k){
 	return quickselect(data,k,0,data.length-1);	
     }
     private static int quickselect(int[] data, int k, int left, int right){
-
-	return data[k];
+	if(left==right){
+	    return data[left];
+	}
+	int retNum = partition(data,0,data.length-1);
+	if(retNum == k){ //if you guessed correctly, and it happened to be k
+	    return data[k];
+	}
+	else{
+	    if(retNum < k){
+		return quickselect(data,k,retNum+1,right);
+	    }
+	    else{
+		return quickselect(data,k,left,retNum-1);
+	    }
+	}
     }
     public static void printArray(int[] data){
 	String retString = "[";
@@ -67,8 +77,9 @@ public class Quick{
 	int[] ary = {20,15,9,-2,6,7};
 	//System.out.println(partition(ary,0,ary.length-1));
 	//printArray(ary);
+	System.out.println(quickselect(ary,5));
 	int[] ary2 = {2,15,9,9,-2,-4,6,20};
-	System.out.println(partition(ary2,0,ary2.length-1));
-	printArray(ary2);
+	//System.out.println(partition(ary2,0,ary2.length-1));
+	//printArray(ary2);
     }
 }
