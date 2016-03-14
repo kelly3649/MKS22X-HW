@@ -5,7 +5,7 @@ public class Quick{
 	Random r = new Random();
 	int aIndex = r.nextInt(right-left+1) + left;
 	int a = data[aIndex];
-	System.out.println("a/index" + a +"/" + aIndex);
+	//System.out.println("a/index" + a +"/" + aIndex);
 	int strtR = right;
 	//put "a" in corner, like a problem child
 	int copy = data[strtR];
@@ -67,14 +67,13 @@ public class Quick{
 	quickSort(data,0,data.length-1);
     }
     private static void quickSort(int[] data, int left, int right){
-	System.out.println("left/right" + left + "/" + right);
+	//System.out.println("left/right" + left + "/" + right);
 	if(right-left>=1){
 	    int retNum = partition(data,left,right);
-	    printArray(data);
+	    //printArray(data);
 	    quickSort(data,left,retNum-1);
 	    quickSort(data,retNum+1,right);
 	}
-	System.out.println("DONE");
     }
     public static void printArray(int[] data){
 	String retString = "[";
@@ -93,8 +92,8 @@ public class Quick{
 	//printArray(ary);
 	int[] ary2 = {2,15,9,9,-2,-4,6,20};
 	//System.out.println(partition(ary2,0,ary2.length-1));
-	quickSort(ary2);
-	printArray(ary2);
+	//quickSort(ary2);
+	//printArray(ary2);
 	//System.out.println(quickselect(ary2,0));
     }
 }
