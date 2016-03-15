@@ -1,0 +1,41 @@
+public class MyLinkedList{
+    LNode start;
+    int size;
+
+    private class LNode{
+	int value;
+	LNode next;
+
+
+	public LNode(int val){
+	    value = val;
+	}
+	public int getValue(){
+	    return value;
+	}
+	public LNode getNext(){
+	    return next;
+	}
+	public void setValue(int val){
+	    value = val;
+	}
+	public void setNext(LNode nxt){
+	    next = nxt;
+	}
+    }
+    public MyLinkedList(){
+	start = null;
+	size = 0;
+    }
+    
+public String toString(){
+	String retString = "[";
+        int i = size;
+	while(i>0){
+	    retString += start.getValue() +",";
+	    start = start.getNext();
+	    i--;
+	}
+	retString += "]";
+	return retString; 
+    }   
