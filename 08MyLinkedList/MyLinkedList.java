@@ -5,8 +5,6 @@ public class MyLinkedList{
     private class LNode{
 	int value;
 	LNode next;
-
-
 	public LNode(int val){
 	    value = val;
 	}
@@ -28,23 +26,29 @@ public class MyLinkedList{
 	size = 0;
     }
     public void add(int val){
-	while(start.getValue() != null){
+	while(start != null){
 	    start = start.getNext();
 	}
+	if(size == 0){
+	    start = new LNode(val);
+	}
 	start.setValue(val);
+	size++;
     }
-public String toString(){
+    public String toString(){
 	String retString = "[";
         int i = size;
-	while(i>0){
+	while(i>1){
 	    retString += start.getValue() +",";
 	    start = start.getNext();
 	    i--;
 	}
-	retString += "]";
+	retString += start.getValue() + "]";
 	return retString; 
     }   
-    public static void main(String[args]){
+    public static void main(String[] args){
 	MyLinkedList l1 = new MyLinkedList();
 	l1.add(3);
-	System.out.println(MyLinkedList()
+	System.out.println(l1);
+    }
+}
