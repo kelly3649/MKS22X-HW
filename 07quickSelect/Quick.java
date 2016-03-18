@@ -1,6 +1,8 @@
 import java.util.Random;
-
+import java.util.Arrays;
 public class Quick{
+    private static long startTime = System.currentTimeMillis();
+    
     private static int partitionOld(int[]data, int left, int right){
 	Random r = new Random();
 	int aIndex = r.nextInt(right-left+1) + left;
@@ -71,15 +73,19 @@ public class Quick{
 	if(right-left>=1){
 	    int retNum = partitionOld(data,left,right);
 	    //printArray(data);
+	    if(retNum-1 > left){
 	    quickSortOld(data,left,retNum-1);
+	    }
+	    if(retNum+1 < right){
 	    quickSortOld(data,retNum+1,right);
+	    }
 	}
     }
     private static int[] partition(int[]data, int left, int right){
 	Random r = new Random();
 	int aIndex = r.nextInt(right-left+1) + left;
 	int a = data[aIndex];
-	System.out.println("a/index" + a +"/" + aIndex);
+	//System.out.println("a/index" + a +"/" + aIndex);
 	int[] temp = new int[right-left+1];
 	int current = left;
 	int end = right;
@@ -108,8 +114,8 @@ public class Quick{
 	for(int i = left;i<right+1;i++){//copying back array
 	    data[i] = temp[i-left];
 	}
-	printArray(data);
-	printArray(indeces);
+	//printArray(data);
+	//printArray(indeces);
 	return indeces;
     }
         
@@ -138,12 +144,42 @@ public class Quick{
     public static void main(String[]args){
 	int[] ary = {20,15,9,-2,6,2,4,15,7};
       	//partition(ary,0,ary.length-1);
-	//quickSort(ary);
+	//quickSortOld(ary);
 	//printArray(ary);
 	int[] ary2 = {2,15,9,9,-2,-4,6,20};
 	//partition(ary2,0,ary2.length-1);
-	quickSort(ary2);
-	printArray(ary2);
+	//quickSort(ary2);
+	//printArray(ary2);
 	//System.out.println(quickselect(ary2,0));
+	/* 4a
+	int[] d = new int [4000000];
+	int[] c = new int [d.length];
+	for(int i = 0; i < d.length; i++){
+	    d[i]= (int)(Math.random()*Integer.MAX_VALUE);
+	    c[i]= d[i];
+	}
+	quickSort(d); //or even your old quicksort!!!
+	Arrays.sort(c);
+	System.out.println("Done: Sorted=" + Arrays.equals(d,c));
+	*/
+	
+	int[]a = new int [4000000];//fill with random values from 0 to 3 inclusive
+	//Calculate the time it takes to do each of the following: (average 3 runs to be precise)
+	//a1
+	//Arrays.sort(a);
+	//a2
+	//Quick.quickSortOld(a);
+	//a3
+        //Quick.quickSort(a);
+	int[]b = new int [4000000];//fill with random values from Integer.MIN_VALUE to Integer.MAX_VALUE inclusive.
+	//Calculate the time it takes to do each of the following: (average 3 runs to be precise)
+	//b1
+	//Arrays.sort(b);
+	//b2
+	//Quick.quickSortOld(b);
+        //b3
+	//Quick.quickSort(b);
+	long endTime = System.currentTimeMillis();
+	//System.out.println("It took" + (endTime-startTime) + "milsec");
     }
 }
