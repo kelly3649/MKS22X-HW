@@ -1,7 +1,4 @@
 public class MyLinkedList{
-    LNode start;
-    int size;
-
     private class LNode{
 	int value;
 	LNode next;
@@ -22,71 +19,78 @@ public class MyLinkedList{
 	    next = nxt;
 	}
     }
-    public MyLinkedList(){
-	start = null;
-	size = 0;
-    }
-    public void add(int val){
-	int i = 0;
-	LNode current = start;
-	if(size==0){
-	    start=new LNode(val);
+    LNode head;
+    int size;
+    //dont need constructor, bc start and size are naturally null and 0
+        
+    public boolean add(int val){
+	if(head == null){
+	    head = new LNode(val);
 	}
 	else{
-	    LNode current = start;
-	    while(i<size){
+	    LNode current = head;
+	    while(current.getNext() != null){
 		current = current.getNext();
-		i++;
 	    }
-
-	    current = new LNode(val);
-	    start = current;
+	    current.setNext(new LNode(val));
 	}
 	size++;
+	return true;
     }
     public int get(int index){
+	LNode current = head;
 	int i = 0;
 	while(i<index){
-	    start = start.getNext();
+	    current = current.getNext();
 	    i++;
 	}
-	return start.getValue();
+	return current.getValue();
     }
     public int set(int index, int newValue){
+	LNode current = head;
 	int i = 0;
 	while(i<index){
-	    start=start.getNext();
+	    current=current.getNext();
 	    i++;
 	}
-	int copy = start.getValue();
-	start.setValue(newValue);
+	int copy = current.getValue();
+	current.setValue(newValue);
 	return copy;
     }
     public int size(){
 	return size;
     }
     public int remove(int index){
+	LNode current = head;
 	int i = 0;
-	while(i<index-1){
-	    start = start.getNext();
-	    i++;
+	int copy;
+	if(index == 0){
+	    copy = current.getValue();
+	    current.setValue(current.getNext().getValue());
+	    current.setNext(current.getNext().getNext());
 	}
-	int copy = start.getNext().getValue();
-	start.setNext(start.getNext().getNext());
+	else{
+	    while(i<index-1){
+		current = current.getNext();
+		i++;
+	    }copy = current.getNext().getValue();
+	    current.setNext(current.getNext().getNext());
+	}
 	size--;
 	return copy;
     }
     
     public String toString(){
 	String retString = "[";
-        int i = size;
-	while(i>0){
-	    retString += start.getValue() +",";
-	    start = start.getNext();
-	    i--;
+        LNode current = head;
+	while(current != null){
+	    retString += current.getValue();
+	    if(current.getNext() != null){
+	     retString += ", ";
+	    }
+	    current = current.getNext();
 	}
-	//retString += start.getValue() + "]";
-	return retString; 
+	return retString + "]"; 
     }   
     public static void main(String[] args){
 	MyLinkedList l1 = new MyLinkedList();
@@ -95,13 +99,13 @@ public class MyLinkedList{
        	l1.add(4);
 	System.out.println(l1);
 	l1.add(5);
-
-	/*	System.out.println("size is " + l1.size());
+	System.out.println(l1);
+     	System.out.println("size is " + l1.size());
 	l1.remove(1);
 	System.out.println(l1);
 	System.out.println("size is " + l1.size());
 	System.out.println("element/index " + l1.get(1) + "/1");
 	l1.set(1,13);
 	System.out.println("element/index " + l1.get(1) + "/1");
-	*/  }
+    }
 }
