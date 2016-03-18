@@ -23,20 +23,6 @@ public class MyLinkedList{
     int size;
     //dont need constructor, bc start and size are naturally null and 0
         
-    public boolean add(int val){
-	if(head == null){
-	    head = new LNode(val);
-	}
-	else{
-	    LNode current = head;
-	    while(current.getNext() != null){
-		current = current.getNext();
-	    }
-	    current.setNext(new LNode(val));
-	}
-	size++;
-	return true;
-    }
     public int get(int index){
 	LNode current = head;
 	int i = 0;
@@ -79,7 +65,61 @@ public class MyLinkedList{
 	size--;
 	return copy;
     }
-    
+    public boolean add(int val){
+	if(head == null){
+	    head = new LNode(val);
+	}
+	else{
+	    LNode current = head;
+	    while(current.getNext() != null){
+		current = current.getNext();
+	    }
+	    current.setNext(new LNode(val));
+	}
+	size++;
+	return true;
+    }
+
+    public boolean add(int index, int value){
+	LNode current = head;
+	if(index == 0){
+	    head = new LNode(value);
+	    head.setNext(current);
+	    size++;
+	    return true;
+	}
+	if(index == size()){
+	    add(value);
+	    size++;
+	    return true;
+	}
+	else{
+	    int i = 0;
+	    while(i<index-1){
+		current = current.getNext();
+		i++;
+	    }
+	    LNode newNode = new LNode(value);
+	    newNode.setNext(current.getNext());
+	    current.setNext(newNode);
+	}
+	size++;
+	return true;
+    }
+    public int indexOf(int value){
+	LNode current = head;
+	int i = 0;
+	while(i<size()){
+	    if(current.getValue() == value){
+		return i;
+	    }
+	    if(current.getNext() != null){
+	    current = current.getNext();
+	    }
+	    i++;
+	}
+	return -1;
+    }
     public String toString(){
 	String retString = "[";
         LNode current = head;
@@ -94,7 +134,7 @@ public class MyLinkedList{
     }   
     public static void main(String[] args){
 	MyLinkedList l1 = new MyLinkedList();
-	l1.add(3);
+	/*	l1.add(3);
 	System.out.println(l1);
        	l1.add(4);
 	System.out.println(l1);
@@ -107,5 +147,14 @@ public class MyLinkedList{
 	System.out.println("element/index " + l1.get(1) + "/1");
 	l1.set(1,13);
 	System.out.println("element/index " + l1.get(1) + "/1");
-    }
+	System.out.println(l1);
+	l1.add(1,4);//is add(index,val) NOT the usual way around
+	System.out.println(l1);
+	l1.add(3,-5);
+	System.out.println(l1);
+	l1.add(0,6);
+	System.out.println(l1);
+	System.out.println("element -5 can be found at index: " + l1.indexOf(-5));
+	System.out.println("element 4 can be found at index: " + l1.indexOf(4));
+	*/}
 }
