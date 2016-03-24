@@ -1,4 +1,11 @@
-public class MyLinkedList<T>{
+import java.util.*;
+
+public class MyLinkedList<T>{// implements Iterabke<T>{
+    
+    /* public Iterator<T> iterator(){
+	return new MyLinkedListIterator(); //only time you make this
+	} */   
+
     private class LNode{
 	T value;
 	LNode next;
@@ -47,6 +54,10 @@ public class MyLinkedList<T>{
 	return size;
     }
     public T remove(int index){
+	//throw exception
+	if(index<0 || index>= size()){
+	    throw new IndexOutOfBoundsException();
+	}
 	LNode current = head;
 	int i = 0;
 	T copy;
@@ -133,15 +144,19 @@ public class MyLinkedList<T>{
 	return retString + "]"; 
     }   
     public static void main(String[] args){
-	MyLinkedList l1 = new MyLinkedList();
-		l1.add(3);
+	MyLinkedList<Integer> l1 = new MyLinkedList<Integer>();
+	l1.add(3);
 	System.out.println(l1);
        	l1.add(4);
 	System.out.println(l1);
 	l1.add(5);
 	System.out.println(l1);
      	System.out.println("size is " + l1.size());
+	try{
 	l1.remove(1);
+	}catch(IndexOutOfBoundsException e){
+	    System.out.println("Index out of bounds");
+	}
 	System.out.println(l1);
 	System.out.println("size is " + l1.size());
 	System.out.println("element/index " + l1.get(1) + "/1");
