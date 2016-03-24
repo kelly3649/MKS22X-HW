@@ -2,10 +2,29 @@ import java.util.*;
 
 public class MyLinkedList<T>{// implements Iterabke<T>{
     
-    /* public Iterator<T> iterator(){
+     public Iterator<T> iterator(){
 	return new MyLinkedListIterator(); //only time you make this
-	} */   
-
+	} 
+     public class MyLinkedListIterator implements Iterator<T>{
+	 private LNode next;
+	 public MyLinkedListIterator(){
+	     next = head;
+	 }
+	 public boolean hasNext(){
+	     return next != null;
+	 }
+	 public T next(){
+	     if(!hasNext()){
+		 throw new NoSuchElementException();
+	     }
+	     T value = next.getValue();
+	     next = next.getNext();
+	     return value; //advance the pointer bfr returns!
+	 } 
+	 public void remove(){//optional, not wanted
+	     throw new UnsupportedOperationException(); 
+	 }   
+     }
     private class LNode{
 	T value;
 	LNode next;
