@@ -163,6 +163,7 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	return retString + "]"; 
     }   
     public static void main(String[] args){
+	/*
 	MyLinkedList<Integer> l1 = new MyLinkedList<Integer>();
 	l1.add(3);
 	System.out.println(l1);
@@ -190,5 +191,16 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	System.out.println(l1);
 	System.out.println("element -5 can be found at index: " + l1.indexOf(-5));
 	System.out.println("element 4 can be found at index: " + l1.indexOf(4));
+	}*/
+	MyLinkedList<Integer> n = new MyLinkedList<Integer>();
+	for(int i=0;i<10;i++){
+	    n.add(i);
 	}
+	System.out.println(n);
+	Iterator<Integer> it = n.iterator();
+	Iterator<Integer> it2 = n.iterator();
+
+	System.out.println(it.next());
+	System.out.println(it.next());
+    }
 }
