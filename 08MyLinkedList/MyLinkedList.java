@@ -96,15 +96,14 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	return copy;
     }
     public boolean add(T val){
-	if(head == null){
+	if(tail == null){//head has to be null if tail is null
 	    head = new LNode(val);
+	    tail = head;
 	}
 	else{
-	    LNode current = head;
-	    while(current.getNext() != null){
-		current = current.getNext();
-	    }
-	    current.setNext(new LNode(val));
+	    LNode current = tail;
+	    tail = new LNode(val);
+	    current.setNext(tail);
 	}
 	size++;
 	return true;
@@ -140,7 +139,7 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	LNode current = head;
 	int i = 0;
 	while(i<size()){
-	    if(current.getValue() == value){
+	    if(current.getValue().equals(value)){
 		return i;
 	    }
 	    if(current.getNext() != null){
@@ -163,7 +162,7 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	return retString + "]"; 
     }   
     public static void main(String[] args){
-	/*
+	
 	MyLinkedList<Integer> l1 = new MyLinkedList<Integer>();
 	l1.add(3);
 	System.out.println(l1);
@@ -191,7 +190,7 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	System.out.println(l1);
 	System.out.println("element -5 can be found at index: " + l1.indexOf(-5));
 	System.out.println("element 4 can be found at index: " + l1.indexOf(4));
-	}*/
+	
 	MyLinkedList<Integer> n = new MyLinkedList<Integer>();
 	for(int i=0;i<10;i++){
 	    n.add(i);
