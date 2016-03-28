@@ -45,7 +45,7 @@ public class MyStack<T>{
 
     public static void main(String[]args){
 	MyStack<Integer> m1 = new MyStack<Integer>();
-	System.out.println(m1.isEmpty());
+	/*System.out.println(m1.isEmpty());
 	m1.push(123);
 	System.out.println(m1.size());
 	m1.push(4);
@@ -53,6 +53,6 @@ public class MyStack<T>{
 	System.out.println(m1.peek());
 	System.out.println(m1.pop());
 	System.out.println(m1.isEmpty());
-	
+	*/
     }
 }
