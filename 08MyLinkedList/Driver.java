@@ -1,3 +1,4 @@
+import java.util.*;
 public class Driver{
     public static void main(String[]args){
 	MyLinkedList<String> m = new MyLinkedList<String>();
@@ -71,7 +72,7 @@ public class Driver{
         System.out.println(n);
 
         //test remove random items:
-        Random rand = new Random(0);
+	/* Random rand = new Random(0);
         for(int i = 0; i < 6000; i++){
             int op = rand.nextInt(4);
 
@@ -92,5 +93,38 @@ public class Driver{
         }
         System.out.println(m.toString(true));
         System.out.println(n);
+	*/
+	//test speed of add in front and at end.
+        long start,end;
+        System.out.println("Add 100k to front");
+
+        start = System.currentTimeMillis();
+        for(int i = 0; i < 100000; i++)
+            n.add(0,""+i);
+        end = System.currentTimeMillis();
+        System.out.println( "ArrayList "+(end-start)/1000.0 );
+
+        start = System.currentTimeMillis();
+        for(int i = 0; i < 100000; i++)
+            m.add(0,""+i);
+        end = System.currentTimeMillis();
+        System.out.println( "LinkedList "+(end-start)/1000.0 );
+
+
+        System.out.println("Add 1m to end");
+
+        start = System.currentTimeMillis();
+        for(int i = 0; i < 1000000; i++)
+            n.add(""+i);
+        end = System.currentTimeMillis();
+        System.out.println( "ArrayList "+(end-start)/1000.0 );
+
+        start = System.currentTimeMillis();
+        for(int i = 0; i < 1000000; i++)
+            m.add(""+i);
+        end = System.currentTimeMillis();
+        System.out.println( "LinkedList "+(end-start)/1000.0 );
+
+        
     }
 }

@@ -50,6 +50,11 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
     //dont need constructor, bc start and size are naturally null and 0
         
     public T get(int index){
+	//throw exception
+	if(index<0 || index>= size()){
+	    System.out.println("INDEX OUT OF BOUNDS");
+	    throw new IndexOutOfBoundsException();
+	}
 	LNode current = head;
 	int i = 0;
 	while(i<index){
@@ -59,6 +64,11 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	return current.getValue();
     }
     public T set(int index, T newValue){
+	//throw exception
+	if(index<0 || index>= size()){
+	    System.out.println("INDEX OUT OF BOUNDS");
+	    throw new IndexOutOfBoundsException();
+	}
 	LNode current = head;
 	int i = 0;
 	while(i<index){
@@ -74,7 +84,8 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
     }
     public T remove(int index){
 	//throw exception
-	if(index<0 || index>= size()){
+	if(index<0 || index >= size()){
+	    System.out.println("INDEX OUT OF BOUNDS");
 	    throw new IndexOutOfBoundsException();
 	}
 	LNode current = head;
@@ -110,6 +121,11 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
     }
 
     public boolean add(int index, T value){
+	//throw exception
+	if(index < 0 || index > size){
+	    System.out.println("INDEX OUT OF BOUNDS");
+	    throw new IndexOutOfBoundsException();
+	}
 	LNode current = head;
 	if(index == 0){
 	    head = new LNode(value);
@@ -160,11 +176,27 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	    current = current.getNext();
 	}
 	return retString + "]"; 
-    }   
+    }
+    public String toString(boolean b){
+	String retString = "size is " + size();
+	if(b == true){
+	    retString += "[" + head.getValue() + ", ]...[" + tail.getValue() + ", ]" + "\n [";       
+	    LNode current = head;
+	    while(current != null){
+		retString += current.getValue();
+		if(current.getNext() != null){
+		    retString += ", ";
+		}
+		current = current.getNext();
+	    }
+	    return retString + "]"; 
+	}
+	return retString;
+    }
     public static void main(String[] args){
 	
 	MyLinkedList<Integer> l1 = new MyLinkedList<Integer>();
-	l1.add(3);
+	/*l1.add(3);
 	System.out.println(l1);
        	l1.add(4);
 	System.out.println(l1);
@@ -186,8 +218,7 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	System.out.println(l1);
 	l1.add(3,-5);
 	System.out.println(l1);
-	l1.add(0,6);
-	System.out.println(l1);
+
 	System.out.println("element -5 can be found at index: " + l1.indexOf(-5));
 	System.out.println("element 4 can be found at index: " + l1.indexOf(4));
 	
@@ -201,5 +232,8 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 
 	System.out.println(it.next());
 	System.out.println(it.next());
+	*/
+	//    	l1.add(0,6);
+	//System.out.println(l1);}
     }
 }
