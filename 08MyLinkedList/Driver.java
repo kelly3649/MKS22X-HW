@@ -72,20 +72,31 @@ public class Driver{
         System.out.println(n);
 
         //test remove random items:
-	/* Random rand = new Random(0);
+	 Random rand = new Random(0);
         for(int i = 0; i < 6000; i++){
             int op = rand.nextInt(4);
-
+	    System.out.println("op: " + op);
             if(op == 0 || n.size()==0){//ensure never empty
+		System.out.println(m.toString(true));
+		System.out.println(n);
                 n.add(""+i);
                 m.add(""+i);
+		System.out.println("after adding: " + m.toString(true));
+		System.out.println("after adding: " + n);
             }else if(op == 1 ){
                 int x = rand.nextInt(n.size());
+		System.out.println("x: " + x);
+		System.out.println(m.toString(true));
+		System.out.println(n);
                 n.add(x,""+i);
                 m.add(x,""+i);
             }else{
                 int x = rand.nextInt(n.size());
+		System.out.println("x: " + x);
+		System.out.println(m.toString(true));
+		System.out.println(n);
                 if(!n.remove(x).equals(m.remove(x))){
+		    
                     System.out.println("Non matching elements removed\n");
                     System.exit(1);
                 }
@@ -93,9 +104,9 @@ public class Driver{
         }
         System.out.println(m.toString(true));
         System.out.println(n);
-	*/
+	
 	//test speed of add in front and at end.
-        long start,end;
+        /*long start,end;
         System.out.println("Add 100k to front");
 
         start = System.currentTimeMillis();
@@ -124,7 +135,7 @@ public class Driver{
             m.add(""+i);
         end = System.currentTimeMillis();
         System.out.println( "LinkedList "+(end-start)/1000.0 );
-
+	*/
         
     }
 }

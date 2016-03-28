@@ -100,21 +100,33 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	    while(i<index-1){
 		current = current.getNext();
 		i++;
-	    }copy = current.getNext().getValue();
+	    }
+	    if(index == size-1){ //removing the last element
+		copy = current.getNext().getValue();
+		current.setNext(null);
+		tail = current;
+	    }
+	    else{
+	    copy = current.getNext().getValue();
 	    current.setNext(current.getNext().getNext());
+	    }
 	}
 	size--;
 	return copy;
     }
     public boolean add(T val){
-	if(tail == null){//head has to be null if tail is null
+	if(head == null){
 	    head = new LNode(val);
 	    tail = head;
 	}
+	else if(head == tail){
+	    head.setNext(new LNode(val));
+	    tail = head.getNext();
+	}
 	else{
 	    LNode current = tail;
-	    tail = new LNode(val);
-	    current.setNext(tail);
+	    current.setNext(new LNode(val));
+	    tail = current.getNext();
 	}
 	size++;
 	return true;
@@ -133,23 +145,24 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	    size++;
 	    return true;
 	}
-	if(index == size()){
-	    add(value);
-	    size++;
-	    return true;
-	}
 	else{
 	    int i = 0;
 	    while(i<index-1){
 		current = current.getNext();
 		i++;
 	    }
-	    LNode newNode = new LNode(value);
-	    newNode.setNext(current.getNext());
-	    current.setNext(newNode);
+	    if(index == size){
+		current.setNext(new LNode(value));
+		tail = current.getNext();
+	    }
+	    else{
+		LNode newNode = new LNode(value);
+		newNode.setNext(current.getNext());
+		current.setNext(newNode);
+	    }
+	    size++;
+	    return true;
 	}
-	size++;
-	return true;
     }
     public int indexOf(T value){
 	LNode current = head;
@@ -196,7 +209,7 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
     public static void main(String[] args){
 	
 	MyLinkedList<Integer> l1 = new MyLinkedList<Integer>();
-	/*l1.add(3);
+	l1.add(3);
 	System.out.println(l1);
        	l1.add(4);
 	System.out.println(l1);
@@ -218,6 +231,8 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	System.out.println(l1);
 	l1.add(3,-5);
 	System.out.println(l1);
+ 	l1.add(0,6);
+	System.out.println(l1);
 
 	System.out.println("element -5 can be found at index: " + l1.indexOf(-5));
 	System.out.println("element 4 can be found at index: " + l1.indexOf(4));
@@ -232,8 +247,6 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 
 	System.out.println(it.next());
 	System.out.println(it.next());
-	*/
-	//    	l1.add(0,6);
-	//System.out.println(l1);}
-    }
+	
+	    }
 }
