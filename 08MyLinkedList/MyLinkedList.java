@@ -32,6 +32,9 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	    value = val;
 	    next = null;
 	}
+	public String toString(){
+	    return value.toString();
+	}
 	public T getValue(){
 	    return value;
 	}
@@ -91,6 +94,13 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	LNode current = head;
 	int i = 0;
 	T copy;
+	if(size == 1){
+	    copy = head.getValue();
+	    head = null;
+	    tail = head;
+	    size--;
+	    return copy;
+	}
 	if(index == 0){
 	    copy = current.getValue();
 	    current.setValue(current.getNext().getValue());
@@ -115,18 +125,19 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	return copy;
     }
     public boolean add(T val){
+	System.out.println(head + " " + tail);
 	if(head == null){
 	    head = new LNode(val);
 	    tail = head;
 	}
-	else if(head == tail){
+	else if(size() == 1){
 	    head.setNext(new LNode(val));
 	    tail = head.getNext();
 	}
 	else{
-	    LNode current = tail;
-	    current.setNext(new LNode(val));
-	    tail = current.getNext();
+	    //LNode current = tail;
+	    tail.setNext(new LNode(val));
+	    tail = tail.getNext();
 	}
 	size++;
 	return true;
@@ -190,9 +201,11 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 	}
 	return retString + "]"; 
     }
+   
     public String toString(boolean b){
 	String retString = "size is " + size();
 	if(b == true){
+	    if(size() != 0){
 	    retString += "[" + head.getValue() + ", ]...[" + tail.getValue() + ", ]" + "\n [";       
 	    LNode current = head;
 	    while(current != null){
@@ -203,6 +216,7 @@ public class MyLinkedList<T>{// implements Iterabke<T>{
 		current = current.getNext();
 	    }
 	    return retString + "]"; 
+	    }
 	}
 	return retString;
     }

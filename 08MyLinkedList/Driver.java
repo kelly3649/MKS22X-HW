@@ -74,6 +74,7 @@ public class Driver{
         //test remove random items:
 	 Random rand = new Random(0);
         for(int i = 0; i < 6000; i++){
+	    System.out.println(i);
             int op = rand.nextInt(4);
 	    System.out.println("op: " + op);
             if(op == 0 || n.size()==0){//ensure never empty
@@ -95,8 +96,7 @@ public class Driver{
 		System.out.println("x: " + x);
 		System.out.println(m.toString(true));
 		System.out.println(n);
-                if(!n.remove(x).equals(m.remove(x))){
-		    
+                if(!n.remove(x).equals(m.remove(x))){		    
                     System.out.println("Non matching elements removed\n");
                     System.exit(1);
                 }
