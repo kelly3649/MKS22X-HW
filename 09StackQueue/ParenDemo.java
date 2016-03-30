@@ -1,17 +1,18 @@
 import java.util.*;
 public class ParenDemo{
+
     public static char closeParen(char openParen){
-	if(openParen == '{'){
-	    return '}';
+	if(openParen == '}'){
+	    return '{';
 	}
-	if(openParen == '['){
-	    return ']';
+	if(openParen == ']'){
+	    return '[';
 	}
-	if(openParen == '<'){
+	if(openParen == '>'){
 	    return '>';
 	}
 	else{
-	    return ')';
+	    return '(';
 	}
     }
     public static boolean isOpen(char c){
@@ -29,6 +30,13 @@ public class ParenDemo{
     }
     
     public static boolean isMatching(String s){
+	MyStack<Character> pStack = new MyStack();
+	for(int i = 0;i<s.length();i++){
+	    if(isOpen()){
+		pStack.push(s.charAt(i));
+	    }
+	    if(isClose()){
+		char expected = 
 	ArrayList<Character> pList = new ArrayList<Character>(); //not char
 	char[] pAry = {'{','<','(','[','}','>',')',']'}; //8 beg and end paren
 	//first, make an ArrayList, with ONLY the paren, exluding all other char
@@ -48,8 +56,8 @@ public class ParenDemo{
 		  index++;
 		}
 	    }
-	    else{ //if there is a closing bracket bfr a open one
-		return false;
+	    else{ // is a closing bracket, check if is right one
+		if(
 	    }
 	    //System.out.println("after while loop, index is:" + index);
 	    if(index < pList.size()){ //stopped bc found end paren
