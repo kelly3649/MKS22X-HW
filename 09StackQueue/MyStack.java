@@ -45,6 +45,15 @@ public class MyStack<T>{
 
     public static void main(String[]args){
 	MyStack<Integer> m1 = new MyStack<Integer>();
+	Random r = new Random();
+	for(int i = 0;i<1000;i++){
+	    int x = r.nextInt(100)-50;//between -50 and 50
+	    m1.push(x);
+	    if(r.nextInt(2) == 0){
+		m1.pop();
+		System.out.println("size is supposed to be: " + (i+1) + "after pop, size is " + m1.size());
+	    }
+	}
 	/*System.out.println(m1.isEmpty());
 	m1.push(123);
 	System.out.println(m1.size());
