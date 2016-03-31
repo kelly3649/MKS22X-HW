@@ -39,7 +39,7 @@ public class ParenDemo{
 		if(openParens.isEmpty()){ //too many closing parens
 		    return false;
 		}
-		else{
+		
 		    char expected = matchParen(s.charAt(i));
 		    if(openParens.pop() != expected){ //if match,rmv top of stack too 
 			return false; //mismatch
@@ -68,5 +68,5 @@ public class ParenDemo{
 	}
  
     }
-}
 
+}
