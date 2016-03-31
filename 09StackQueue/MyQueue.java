@@ -46,7 +46,16 @@ public class MyQueue<T>{
 	return size() == 0;
     }
     public static void main(String[]args){
-	MyQueue<String> m1 = new MyQueue<String>();
+	MyQueue<Integer> m1 = new MyQueue<Integer>();
+	Random r = new Random();
+	for(int i = 0;i<1000;i++){
+	    int x = r.nextInt(100)-50;//between -50 and 50
+	    m1.enqueue(x);
+	    if(r.nextInt(2) == 0){
+		m1.dequeue();
+		System.out.println("size is supposed to be: " + (i+1) + "after pop, size is " + m1.size());
+	    }
+	}
 	/*
 	System.out.println(m1.isEmpty());
 	System.out.println(m1.size());
