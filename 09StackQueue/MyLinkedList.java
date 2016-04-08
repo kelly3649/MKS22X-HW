@@ -84,10 +84,12 @@ public class MyLinkedList<T> implements Iterable<T>{
     }
     public boolean add(T value){
 	if(head == null){
-	    head = new LNode(value);
+	    head = new LNode(value); //next and prev will aut be null
 	    tail = head;
 	}else{
-	    tail.setNext(new LNode(value));
+	    LNode p = new LNode(value);
+	    p.setPrev(tail);
+	    tail.setNext(p);
 	    tail = tail.getNext();
 	}
 	size++;
@@ -100,22 +102,24 @@ public class MyLinkedList<T> implements Iterable<T>{
 	LNode temp;
 	if(index == 0){
 	    temp = head;
-	    head = head.getNext();
-	    size--;
-	    if(head == null){
+	    head.getNext().setPrev(null);
+	    head = head.getNext();	    
+	    if(head == null){ //if there was only one element
 		tail = null;
 	    }
-	    return temp.getValue();
-	}else{
+	}else if(index == size-1){
+	    temp = tail;
+	    tail.getPrev().setNext(null);
+	    tail = tail.getPrev();
+	}
+	else{
 	    LNode p = getNth(index-1);
 	    temp = p.getNext();
-	    if(tail == temp){
-		tail = p;
-	    }
 	    p.setNext(p.getNext().getNext());
-	    size --;
-	    return temp.getValue();
+	    p.getNext().setPrev(p);
 	}
+	size--;
+	return temp.getValue();
     }
     public boolean add(int index, T value){
 	if(index < 0 || index > size()){
@@ -170,4 +174,20 @@ public class MyLinkedList<T> implements Iterable<T>{
 	}
 	return -1;
     }
+
+    public static void main(String[]args){
+	
+	MyLinkedList<Integer> m1 = new MyLinkedList<Integer>();
+	for(int i = 0;i<10 ;i++){
+	    m1.add(i);
+	}
+	System.out.println(m1);
+	m1.remove(0);
+	System.out.println(m1);
+	m1.remove(1);
+	System.out.println(m1);
+	m1.remove(7);
+	System.out.println(m1);
+    }
+	
 }
