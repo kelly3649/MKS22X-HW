@@ -1,0 +1,16 @@
+public class Node{
+    int x,y;
+    Node prev;
+
+    public Node(int row, int col, Node preV){
+	x = row;
+	y = col;
+	prev = preV;
+    }
+    public Node getPrev(){
+	return prev;
+    }
+    public int getValue(){
+	return row*x + col*y;
+    }
+}
