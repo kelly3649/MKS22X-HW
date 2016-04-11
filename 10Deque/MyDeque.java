@@ -21,7 +21,7 @@ public class MyDeque<T>{
 	    retString += ary[i] + ", ";
 	    i++;
 	}
-        retString += ary[ary.length-1] + "] " + ary.length + start + end;
+        retString += ary[ary.length-1] + "] ";// + ary.length + start + end;
 	return retString;
     }
     @SuppressWarnings("unchecked")
@@ -42,13 +42,9 @@ public class MyDeque<T>{
 	//once you copy over,change start and end to normal
 	start = 0;
 	end = size-1;
-	System.out.println(toString());
+	//System.out.println(toString());
     }
-	/*else{//works
-	    for(int i = start;i<end+1;i++){
-		temp[i-start] = ary[i];
-	    }
-	    }*/
+	
 @SuppressWarnings("unchecked")	
     void addFirst(T value){
 	if(size == ary.length){
