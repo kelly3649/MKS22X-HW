@@ -6,11 +6,12 @@ public class MyDeque<T>{
     private int start;
     private int end;
 
+    @SuppressWarnings("unchecked")
     public MyDeque(){
-	ary = new T[10];
-	size = 10;
+	ary = (T[]) new Object[10];
+	size = 0;
 	start = 0;
-	end = 9;
+	end = 0;
     }
 
     public String toString(){
@@ -23,6 +24,7 @@ public class MyDeque<T>{
         retString += ary[ary.length-1] + "]";
 	return retString;
     }
+    @SuppressWarnings("unchecked")
     private T[] copyOver(){
 	T[] temp = new T[size*2];
 	if(end < start){// then you know that start != 0   
@@ -45,18 +47,43 @@ public class MyDeque<T>{
 	    }
 	    }*/
 	
-    void addFirst(T Value){
+    void addFirst(T value){
+	if(size == ary.length){
+	    copyOver();
+	}
+	if(size != 0){
+	    if(start == 0){
+		start = ary.length-1;
+	    }
+	    else{
+		start--;
+	    }
+	}
+        ary[start] = value;
+	size++;
     }
     void addLast(T value){
 	if(size == ary.length){
 	    copyOver();
 	}
-	
+	if(size != 0){
+	    if(end == ary.length-1){ 
+		end = 0;
+	    }
+	    else{
+		end++;
+	    }
+	}
+	ary[end] = value;
+	size++;
     }
     T removeFirst(){
 	if(size == 0){
 	    throw new NoSuchElementException();
 	}
+	T first = ary[start];
+	
+	return first;
     }
     
     T removeLast(){
@@ -77,6 +104,6 @@ public class MyDeque<T>{
 	return ary[end];
     }
 
-    public static void main(String[]args){
-	MyDeque m1 = new MyDeque();
+    
+}
 	
