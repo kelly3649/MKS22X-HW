@@ -3,14 +3,14 @@ public class FrontierQueue<T> implements Frontier<T>{
     /***You can use your classes or built in ones***/
     /***You can extend another class OR wrap around it***/
 
-    MyQueue q = new MyQueue()<T>;
+    MyQueue q = new MyQueue<T>();
 
     public void add(T element){
 	q.enqueue(element);
     }	
     public T next(){
 	if(hasNext()){
-	    return q.peek();
+	    return q.dequeue(); //NOT peek()
 	}
     }
     public boolean hasNext(){

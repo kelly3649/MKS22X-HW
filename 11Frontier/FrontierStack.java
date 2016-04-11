@@ -10,7 +10,7 @@ public class FrontierStack<T> implements Frontier<T>{
     }
     public T next(){
 	if(hasNext()){
-	    return s.peek();
+	    return s.pop(); //not peek()
 	}
     }
     public boolean hasNext(){
