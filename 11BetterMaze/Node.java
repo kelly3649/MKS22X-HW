@@ -1,15 +1,19 @@
 public class Node{
-    int ID;
+    int x,y;
     Node prev;
 
-    public Node(int id, Node preV){
-	ID = id;
+    public Node(int X, int Y, Node preV){
+	x = X;
+	y = Y;
 	prev = preV;
     }
     public Node getPrev(){
 	return prev;
     }
-    public int getValue(){
-	return ID;
+    public int getX(){
+	return x;
+    }
+    public int getY(){
+	return y;
     }
 }
