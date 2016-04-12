@@ -2,7 +2,7 @@ public class BetterMaze{
     private char[][] maze;
     private int[] solution;
     private int      startRow,startCol;
-    private Frontier<???> placesToGo;
+    private Frontier<Node> placesToGo;
     private boolean  animate;//default to false
 
 
@@ -22,14 +22,17 @@ public class BetterMaze{
     /**initialize the frontier as a queue and call solve
     **/
     public boolean solveBFS(){  
-        /** IMPLEMENT THIS **/  ' 
-placesToGo = new Frontier
+        /** IMPLEMENT THIS **/   
+	placesToGo = new FrontierQueue<Node>();
+	solve();
     }   
 
    //initialize the frontier as a stack and call solve
    
 public boolean solveDFS(){  
-        /** IMPLEMENT THIS **/  
+        /** IMPLEMENT THIS **/ 
+ 	placesToGo = new FrontierStack<Node>();
+	solve();
     }    
 
    /**Search for the end of the maze using the frontier. 
@@ -38,10 +41,36 @@ public boolean solveDFS(){
     When animate is true, print the maze each time you 
     process a new node.
     **/
+    public void findStart(){
+	for(int i = 0;i<maze.length;i++){
+	    for(int index = 0;index<maze[0].length;i++){
+		if(maze[i][index] == 'S'){
+		    startRow = i;
+		    startCol = index;
+		}
+	    }
+	}
     public boolean solve(){  
-        /** IMPLEMENT THIS **/  
+        /** IMPLEMENT THIS **/
+	findStart();
+	placesToGo.add(new Node(startRow, startCol,null));
+	
+	while(placesToGo.hasNext()){
+	    Node next = placesToGo.next();
+	   
+	}
+
     }    
-     
+    public Node[] getNeighbors(Node n){
+	Node[] neighbors = new Node[4];
+	if(!outOfBounds(x-1,
+	neighbors[0] = new Node(x-1,y,n);
+	neighbors[1] = new Node(x+1,y,n); 
+	neighbors[2] = new Node(x,y+1,n); 
+	neighbors[3] = new Node(x,y-1,n);
+    }
+	   public boolean outOfBounds(int x, int y){
+
    /**mutator for the animate variable  **/
     public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    
 
