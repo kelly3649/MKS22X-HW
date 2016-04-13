@@ -1,4 +1,27 @@
+import java.util.*;
+import java.io.*;
+
 public class BetterMaze{
+    private class Node{
+	int x,y;
+	Node prev;
+
+	public Node(int X, int Y, Node preV){
+	    x = X;
+	    y = Y;
+	    prev = preV;
+	}
+	public Node getPrev(){
+	    return prev;
+	}
+	public int getX(){
+	    return x;
+	}
+	public int getY(){
+	    return y;
+	}
+    }
+    
     private char[][] maze;
     private int[] solution;
     private int startRow,startCol;
@@ -28,9 +51,9 @@ public class BetterMaze{
 	solve();
     }   
 
-   //initialize the frontier as a stack and call solve
+    //initialize the frontier as a stack and call solve
    
-public boolean solveDFS(){  
+    public boolean solveDFS(){  
         /** IMPLEMENT THIS **/ 
  	placesToGo = new FrontierStack<Node>();
 	solve();
@@ -49,18 +72,30 @@ public boolean solveDFS(){
 	placesToGo.add(new Node(startRow, startCol,null));
 	while(placesToGo.hasNext()){
 	    Node next = placesToGo.next();
-	   	   
+	    for(Node n : process(next)){
+		//then check if it's the end
+		if(checkEnd(n)){
+		    makeSolution(n);
+		    return true;
+		}
+		Node[] neighbors = getNeighbors(next);
+		for(Node n : neighbors){
+		    placesToGo.add(n);
+		}
+	    }
 	}
-	//then check if it's the end
-	/*if(checkEnd(n)){
-	    makeSolution(n);
-	    return true;
-	    }*/
-	Node[] neighbors = getNeighbors(next);
-	for(Node n : neighbors){
-	    placesToGo.add(n);
+	return false; // has no 'E'
+    }
+    public Node[] process(Node next){
+	if(!outOfBounds(next.getX(), next.get(Y))){
 	}
-    }    
+	// not sure what to do here
+    }
+    public boolean checkEnd(Node n){
+	int x = n.getX();
+	int y = n.getY();
+	return maze[x,y] == 'E';
+    }
     public Node[] getNeighbors(Node n){
 	Node[] neighbors = new Node[4];
 	neighbors[0] = new Node(x-1,y,n);
