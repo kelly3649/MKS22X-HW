@@ -72,22 +72,24 @@ public class BetterMaze{
 	placesToGo.add(new Node(startRow, startCol,null));
 	while(placesToGo.hasNext()){
 	    Node next = placesToGo.next();
-	    for(Node n : process(next)){
+	    Node[] neighbors = getNeighbors(next);
+	    for(Node n : neighbors){
+		process(n);
 		//then check if it's the end
 		if(checkEnd(n)){
 		    makeSolution(n);
 		    return true;
-		}
-		Node[] neighbors = getNeighbors(next);
-		for(Node n : neighbors){
-		    placesToGo.add(n);
-		}
+		}		
 	    }
 	}
 	return false; // has no 'E'
     }
-    public Node[] process(Node next){
-	if(!outOfBounds(next.getX(), next.get(Y))){
+    public void makeSolution(Node n){
+
+    }
+    public void process(Node n){ //next is already in bounds, check if each of neighbors is inbounds and then decide whether to add to PTG or not
+	if(!outOfBounds(n.getX(), n.get(Y))){
+	    placesToGo.add(n);
 	}
 	// not sure what to do here
     }
