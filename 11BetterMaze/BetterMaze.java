@@ -81,7 +81,7 @@ public class BetterMaze{
 		    System.out.println("FOUND END");
 		    return true;
 		}
-		System.out.println(process(n));
+	        process(n);
 		maze[n.getX()][n.getY()] = '.';
 	    }
 	}
