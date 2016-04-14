@@ -24,6 +24,7 @@ public class BetterMaze{
     
     private char[][] maze;
     private int[] solution;
+    private int numSteps;
     private int startRow,startCol;
     private int numRow, numCol;
     private Frontier<Node> placesToGo;
@@ -69,15 +70,17 @@ public class BetterMaze{
     public boolean solve(){  
         /** IMPLEMENT THIS **/
 	//add start
+	numSteps = 0;
 	placesToGo.add(new Node(startRow, startCol,null));
 	while(placesToGo.hasNext()){
 	    Node next = placesToGo.next();
 	    Node[] neighbors = getNsetNeighbors(next);
 	    //System.out.println("Found neighbors!");
 	    for(Node n : neighbors){
+		//check if it's the end
 		if(checkEnd(n)){
-		    //then check if it's the end
-		    //makeSolution(n);
+		    getNumSteps(n);  
+		    makeSolution(n);
 		    System.out.println("FOUND END");
 		    return true;
 		}
@@ -91,8 +94,30 @@ public class BetterMaze{
     public String getSRSC(){
 	return "" + startRow + ", " + startCol;
     }
+    public int getNumSteps(Node n){ //from node n(End node)
+	int i = 0;
+	Node current = n; //so you dont really change n until later in makeSol
+	while(current.getPrev() != null){
+	    i++;
+	    current = current.getPrev();
+	}
+	i++;
+	numSteps = i;
+	System.out.println("numSteps: " + numSteps);
+	return numSteps;
+    }
     public void makeSolution(Node n){
-
+	solution = new int[numSteps*2];
+	int i = 0;
+	while(n.getPrev()!= null){
+	    solution[i] = n.getX();
+	    solution[i+1] = n.getY();
+	    i+=2;
+	    n = n.getPrev();
+	}
+	solution[i] = n.getX(); //should be equal to startRow
+	solution[i+1] = n.getY(); //should be equal to startCol
+	System.out.println("i/sol.length" + i + "/" + solution.length);
     }
     public String process(Node n){ //next is already in bounds, check if each of neighbors is inbounds and then decide whether to add to PTG or not
 	if(validSpot(n.getX(), n.getY())){
