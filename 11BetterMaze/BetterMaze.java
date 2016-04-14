@@ -108,17 +108,26 @@ public class BetterMaze{
     }
     public void makeSolution(Node n){
 	solution = new int[numSteps*2];
-	int i = 0;
+	int i = solution.length-1;
 	while(n.getPrev()!= null){
-	    solution[i] = n.getX();
-	    solution[i+1] = n.getY();
-	    i+=2;
+	    solution[i] = n.getY();
+	    solution[i-1] = n.getX();
+	    i-=2;
 	    n = n.getPrev();
 	}
-	solution[i] = n.getX(); //should be equal to startRow
-	solution[i+1] = n.getY(); //should be equal to startCol
+	solution[i] = n.getY(); //should be equal to startRow
+	solution[i-1] = n.getX(); //should be equal to startCol
 	System.out.println("i/sol.length" + i + "/" + solution.length);
     }
+    public String printSolution(){
+	String retString = "[";
+	for(int i = 0;i<solution.length-1;i++){
+	    retString += solution[i] + ",";
+	}
+	retString += solution[solution.length-1] + "]";
+	return retString;
+    }
+	
     public String process(Node n){ //next is already in bounds, check if each of neighbors is inbounds and then decide whether to add to PTG or not
 	if(validSpot(n.getX(), n.getY())){
 	    placesToGo.add(n);
