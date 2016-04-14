@@ -48,7 +48,7 @@ public class BetterMaze{
     public boolean solveBFS(){  
         /** IMPLEMENT THIS **/   
 	placesToGo = new FrontierQueue<Node>();
-	solve();
+	return solve();
     }   
 
     //initialize the frontier as a stack and call solve
@@ -56,7 +56,7 @@ public class BetterMaze{
     public boolean solveDFS(){  
         /** IMPLEMENT THIS **/ 
  	placesToGo = new FrontierStack<Node>();
-	solve();
+	return solve();
     }    
 
    /**Search for the end of the maze using the frontier. 
@@ -77,7 +77,7 @@ public class BetterMaze{
 		process(n);
 		//then check if it's the end
 		if(checkEnd(n)){
-		    makeSolution(n);
+		    //makeSolution(n);
 		    return true;
 		}		
 	    }
@@ -88,7 +88,7 @@ public class BetterMaze{
 
     }
     public void process(Node n){ //next is already in bounds, check if each of neighbors is inbounds and then decide whether to add to PTG or not
-	if(!outOfBounds(n.getX(), n.get(Y))){
+	if(!outOfBounds(n.getX(), n.getY())){
 	    placesToGo.add(n);
 	}
 	// not sure what to do here
@@ -96,20 +96,26 @@ public class BetterMaze{
     public boolean checkEnd(Node n){
 	int x = n.getX();
 	int y = n.getY();
-	return maze[x,y] == 'E';
+	return maze[x][y] == 'E';
     }
     public Node[] getNeighbors(Node n){
+	int x = n.getX();
+	int y = n.getY();
 	Node[] neighbors = new Node[4];
 	neighbors[0] = new Node(x-1,y,n);
 	neighbors[1] = new Node(x+1,y,n); 
 	neighbors[2] = new Node(x,y+1,n); 
 	neighbors[3] = new Node(x,y-1,n);
+	return neighbors;
     }
     public boolean outOfBounds(int x, int y){
 	if(x >= numRow || x < 0){
 	    return true;
 	}
 	if(y >= numCol || x < 0){
+	    return true;
+	}
+	if(maze[x][y] == '#'){
 	    return true;
 	}
 	return false;

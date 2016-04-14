@@ -10,8 +10,9 @@ public class FrontierQueue<T> implements Frontier<T>{
     }	
     public T next(){
 	if(hasNext()){
-	    return q.dequeue(); //NOT peek()
+	    return (T)q.dequeue(); //NOT peek()
 	}
+	return null; //hopefull will never happen
     }
     public boolean hasNext(){
 	return !(q.isEmpty());
