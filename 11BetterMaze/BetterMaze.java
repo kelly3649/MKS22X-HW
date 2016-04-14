@@ -81,12 +81,11 @@ public class BetterMaze{
 		    System.out.println("FOUND END");
 		    return true;
 		}
-		
 		System.out.println(process(n));
-		
-		
+		maze[n.getX()][n.getY()] = '.';
 	    }
 	}
+	  
 	return false; // has no 'E'
     }
     public String getSRSC(){
@@ -118,9 +117,6 @@ public class BetterMaze{
 	neighbors[1] = new Node(x+1,y,n); 
 	neighbors[2] = new Node(x,y+1,n); 
 	neighbors[3] = new Node(x,y-1,n);
-	for(Node neigh : neighbors){
-	    maze[neigh.getX()][neigh.getY()] = '.';
-	}
 	return neighbors;
     }
     public boolean validSpot(int x, int y){
