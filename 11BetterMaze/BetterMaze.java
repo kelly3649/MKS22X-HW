@@ -73,23 +73,34 @@ public class BetterMaze{
 	while(placesToGo.hasNext()){
 	    Node next = placesToGo.next();
 	    Node[] neighbors = getNeighbors(next);
+	    //System.out.println("Found neighbors!");
 	    for(Node n : neighbors){
-		process(n);
-		//then check if it's the end
 		if(checkEnd(n)){
+		    //then check if it's the end
 		    //makeSolution(n);
+		    System.out.println("FOUND END");
 		    return true;
 		}		
+		System.out.println(process(n));
+		
+		
 	    }
 	}
 	return false; // has no 'E'
     }
+    public String getSRSC(){
+	return "" + startRow + ", " + startCol;
+    }
     public void makeSolution(Node n){
 
     }
-    public void process(Node n){ //next is already in bounds, check if each of neighbors is inbounds and then decide whether to add to PTG or not
+    public String process(Node n){ //next is already in bounds, check if each of neighbors is inbounds and then decide whether to add to PTG or not
 	if(!outOfBounds(n.getX(), n.getY())){
 	    placesToGo.add(n);
+	    return "neighbor is goodto go";
+	}
+	else{
+	    return "this neighbor node is OUT OF BOUNDS";
 	}
 	// not sure what to do here
     }
@@ -123,7 +134,7 @@ public class BetterMaze{
 
    /**mutator for the animate variable  **/
     public void setAnimate(boolean b){  /** IMPLEMENT THIS **/
-
+	animate = b;
     }
     public BetterMaze(String filename){
     animate = false;
