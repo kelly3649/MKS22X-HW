@@ -7,9 +7,12 @@ public class Driver{
 	//System.out.println(b1.getSRSC());
 	//b2.setAnimate(true);
 	//System.out.println(b2.solveDFS());
-	System.out.println(b3.solveDFS());
-	System.out.println(b4.solveDFS());
-	
+	//System.out.println(b3.solveDFS());
+	//System.out.println(b4.solveDFS());
+	//System.out.println(b1.solveBFS());
+	//System.out.println(b2.solveBFS());
+	System.out.println(b3.solveBFS());
+	System.out.println(b4.solveBFS());
 	System.out.println("FINISHEd");
     }
 }
