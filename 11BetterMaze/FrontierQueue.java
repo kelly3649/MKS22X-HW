@@ -17,5 +17,10 @@ public class FrontierQueue<T> implements Frontier<T>{
     public boolean hasNext(){
 	return !(q.isEmpty());
     }
-
+    public static void main(String[]args){
+	FrontierQueue<Integer> f1 = new FrontierQueue();
+	f1.enqueue(3);
+	System.out.println(f1.hasNext());
+	System.out.println(f1.next());
+    }
 }

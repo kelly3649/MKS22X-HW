@@ -12,6 +12,7 @@ public class FrontierStack<T> implements Frontier<T>{
 	if(hasNext()){
 	    return (T)s.pop(); //not peek()
 	}
+	return null;
     }
     public boolean hasNext(){
 	return !(s.isEmpty());

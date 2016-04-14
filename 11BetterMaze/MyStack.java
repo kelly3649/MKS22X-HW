@@ -54,7 +54,7 @@ public class MyStack<T>{
 		System.out.println("size is supposed to be: " + (i+1) + "after pop, size is " + m1.size());
 	    }
 	}
-	/*System.out.println(m1.isEmpty());
+	System.out.println(m1.isEmpty());
 	m1.push(123);
 	System.out.println(m1.size());
 	m1.push(4);
@@ -62,6 +62,6 @@ public class MyStack<T>{
 	System.out.println(m1.peek());
 	System.out.println(m1.pop());
 	System.out.println(m1.isEmpty());
-	*/
+	
     }
 }
