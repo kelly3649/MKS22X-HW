@@ -72,7 +72,7 @@ public class BetterMaze{
 	placesToGo.add(new Node(startRow, startCol,null));
 	while(placesToGo.hasNext()){
 	    Node next = placesToGo.next();
-	    Node[] neighbors = getNeighbors(next);
+	    Node[] neighbors = getNsetNeighbors(next);
 	    //System.out.println("Found neighbors!");
 	    for(Node n : neighbors){
 		if(checkEnd(n)){
@@ -80,7 +80,8 @@ public class BetterMaze{
 		    //makeSolution(n);
 		    System.out.println("FOUND END");
 		    return true;
-		}		
+		}
+		
 		System.out.println(process(n));
 		
 		
@@ -95,12 +96,12 @@ public class BetterMaze{
 
     }
     public String process(Node n){ //next is already in bounds, check if each of neighbors is inbounds and then decide whether to add to PTG or not
-	if(!outOfBounds(n.getX(), n.getY())){
+	if(validSpot(n.getX(), n.getY())){
 	    placesToGo.add(n);
 	    return "neighbor is goodto go";
 	}
 	else{
-	    return "this neighbor node is OUT OF BOUNDS";
+	    return "this neighbor node is NOT VALID";
 	}
 	// not sure what to do here
     }
@@ -109,7 +110,7 @@ public class BetterMaze{
 	int y = n.getY();
 	return maze[x][y] == 'E';
     }
-    public Node[] getNeighbors(Node n){
+    public Node[] getNsetNeighbors(Node n){
 	int x = n.getX();
 	int y = n.getY();
 	Node[] neighbors = new Node[4];
@@ -117,19 +118,25 @@ public class BetterMaze{
 	neighbors[1] = new Node(x+1,y,n); 
 	neighbors[2] = new Node(x,y+1,n); 
 	neighbors[3] = new Node(x,y-1,n);
+	for(Node neigh : neighbors){
+	    maze[neigh.getX()][neigh.getY()] = '.';
+	}
 	return neighbors;
     }
-    public boolean outOfBounds(int x, int y){
+    public boolean validSpot(int x, int y){
 	if(x >= numRow || x < 0){
-	    return true;
+	    return false;
 	}
 	if(y >= numCol || x < 0){
-	    return true;
+	    return false;
 	}
 	if(maze[x][y] == '#'){
-	    return true;
+	    return false;
 	}
-	return false;
+	if(maze[x][y] == '.'){
+	    return false;
+	}
+	return true;
     }
 
    /**mutator for the animate variable  **/
