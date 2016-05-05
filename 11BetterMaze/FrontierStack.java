@@ -8,12 +8,21 @@ public class FrontierStack<T> implements Frontier<T>{
     public void add(T element){
 	s.push(element);
     }
+
+    @SuppressWarnings("unchecked")
     public T next(){
 	if(hasNext()){
-	    return s.pop(); //not peek()
+	    return (T)s.pop(); //not peek()
 	}
+	return null;
     }
     public boolean hasNext(){
 	return !(s.isEmpty());
     }
+    public static void main(String[]args){
+	FrontierStack<Integer> f1 = new FrontierStack<Integer>();
+	f1.add(2);
+	System.out.println(f1.hasNext());
+	System.out.println(f1.next());
+    }	
 }

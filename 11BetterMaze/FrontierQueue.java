@@ -7,14 +7,22 @@ public class FrontierQueue<T> implements Frontier<T>{
 
     public void add(T element){
 	q.enqueue(element);
-    }	
+    }
+
+    @SuppressWarnings("unchecked")
     public T next(){
 	if(hasNext()){
-	    return q.dequeue(); //NOT peek()
+	    return (T)q.dequeue(); //NOT peek()
 	}
+	return null; //hopefull will never happen
     }
     public boolean hasNext(){
 	return !(q.isEmpty());
     }
-
+    public static void main(String[]args){
+	FrontierQueue<Integer> f1 = new FrontierQueue<Integer>();
+	f1.add(3);
+	System.out.println(f1.hasNext());
+	System.out.println(f1.next());
+    }
 }

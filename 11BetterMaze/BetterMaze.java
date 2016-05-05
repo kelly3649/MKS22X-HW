@@ -24,6 +24,7 @@ public class BetterMaze{
     
     private char[][] maze;
     private int[] solution;
+    private int numSteps;
     private int startRow,startCol;
     private int numRow, numCol;
     private Frontier<Node> placesToGo;
@@ -48,7 +49,7 @@ public class BetterMaze{
     public boolean solveBFS(){  
         /** IMPLEMENT THIS **/   
 	placesToGo = new FrontierQueue<Node>();
-	solve();
+	return solve();
     }   
 
     //initialize the frontier as a stack and call solve
@@ -56,7 +57,7 @@ public class BetterMaze{
     public boolean solveDFS(){  
         /** IMPLEMENT THIS **/ 
  	placesToGo = new FrontierStack<Node>();
-	solve();
+	return solve();
     }    
 
    /**Search for the end of the maze using the frontier. 
@@ -69,55 +70,108 @@ public class BetterMaze{
     public boolean solve(){  
         /** IMPLEMENT THIS **/
 	//add start
+	numSteps = 0;
 	placesToGo.add(new Node(startRow, startCol,null));
 	while(placesToGo.hasNext()){
 	    Node next = placesToGo.next();
-	    Node[] neighbors = getNeighbors(next);
+	    Node[] neighbors = getNsetNeighbors(next);
+	    //System.out.println("Found neighbors!");
 	    for(Node n : neighbors){
-		process(n);
-		//then check if it's the end
+		//check if it's the end
 		if(checkEnd(n)){
+		    getNumSteps(n);  
 		    makeSolution(n);
+		    System.out.println("FOUND END");
 		    return true;
-		}		
+		}
+	        process(n);
+		maze[n.getX()][n.getY()] = '.';
 	    }
 	}
+	  
 	return false; // has no 'E'
     }
-    public void makeSolution(Node n){
-
+    public String getSRSC(){
+	return "" + startRow + ", " + startCol;
     }
-    public void process(Node n){ //next is already in bounds, check if each of neighbors is inbounds and then decide whether to add to PTG or not
-	if(!outOfBounds(n.getX(), n.get(Y))){
+    public int getNumSteps(Node n){ //from node n(End node)
+	int i = 0;
+	Node current = n; //so you dont really change n until later in makeSol
+	while(current.getPrev() != null){
+	    i++;
+	    current = current.getPrev();
+	}
+	i++;
+	numSteps = i;
+	System.out.println("numSteps: " + numSteps);
+	return numSteps;
+    }
+    public void makeSolution(Node n){
+	solution = new int[numSteps*2];
+	int i = solution.length-1;
+	while(n.getPrev()!= null){
+	    solution[i] = n.getY();
+	    solution[i-1] = n.getX();
+	    i-=2;
+	    n = n.getPrev();
+	}
+	solution[i] = n.getY(); //should be equal to startRow
+	solution[i-1] = n.getX(); //should be equal to startCol
+	System.out.println("i/sol.length" + i + "/" + solution.length);
+    }
+    public String printSolution(){
+	String retString = "[";
+	for(int i = 0;i<solution.length-1;i++){
+	    retString += solution[i] + ",";
+	}
+	retString += solution[solution.length-1] + "]";
+	return retString;
+    }
+	
+    public String process(Node n){ //next is already in bounds, check if each of neighbors is inbounds and then decide whether to add to PTG or not
+	if(validSpot(n.getX(), n.getY())){
 	    placesToGo.add(n);
+	    return "neighbor is goodto go";
+	}
+	else{
+	    return "this neighbor node is NOT VALID";
 	}
 	// not sure what to do here
     }
     public boolean checkEnd(Node n){
 	int x = n.getX();
 	int y = n.getY();
-	return maze[x,y] == 'E';
+	return maze[x][y] == 'E';
     }
-    public Node[] getNeighbors(Node n){
+    public Node[] getNsetNeighbors(Node n){
+	int x = n.getX();
+	int y = n.getY();
 	Node[] neighbors = new Node[4];
 	neighbors[0] = new Node(x-1,y,n);
 	neighbors[1] = new Node(x+1,y,n); 
 	neighbors[2] = new Node(x,y+1,n); 
 	neighbors[3] = new Node(x,y-1,n);
+	return neighbors;
     }
-    public boolean outOfBounds(int x, int y){
+    public boolean validSpot(int x, int y){
 	if(x >= numRow || x < 0){
-	    return true;
+	    return false;
 	}
 	if(y >= numCol || x < 0){
-	    return true;
+	    return false;
 	}
-	return false;
+	if(maze[x][y] == '#'){
+	    return false;
+	}
+	if(maze[x][y] == '.'){
+	    return false;
+	}
+	return true;
     }
 
    /**mutator for the animate variable  **/
     public void setAnimate(boolean b){  /** IMPLEMENT THIS **/
-
+	animate = b;
     }
     public BetterMaze(String filename){
     animate = false;
