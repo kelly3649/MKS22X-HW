@@ -3,6 +3,9 @@ public class BSTree<T extends comparable<T>>{
 	T data;
 	Node left;
 	Node right;
+	public Node(T val){
+	    data = val;
+	}
 	public void setData(T val){
 	    data = val;
 	}
@@ -31,13 +34,13 @@ public class BSTree<T extends comparable<T>>{
 	    if(T == null){
 		setData(value);
 	    }
-	    else if(left.getData() == null){
+	    /*else if(left.getData() == null){
 		    left.setData(value);
 	    }
 	    else if(right.getData() == null){
 		right.setData(value);
-	    }
-
+		}*/
+	}
 	public String toString(){
 	    String retString;
 	    retString += data;
@@ -70,11 +73,25 @@ public class BSTree<T extends comparable<T>>{
     public void add(T value){
 	//check for empty before you do things with root.
 	if (root == null){
-	    root.setData(value);
+	    root = new Node(value);
 	}
-	else if(root.getData().comparesTo(value()) == -1){
- 
+	else{
+	    add(root,d);
+	}
     }
+    public void add(Node where, T d){
+	    if(where.getLeft() == null){
+		if(where.getRight() == null){
+		    where.setRight(new Node(d));
+		}
+		else{
+		    where.setLeft(new Node(d));
+		}
+	    }
+	    else{
+
+
+	}
     public String toString(){
 	//check for empty before you do things with root.
 	return "";
