@@ -7,7 +7,7 @@ public class MyHeap<T extends Comparable<T>>
 
     public MyHeap(){
 	size = 0;
-	data = new (T[])
+	data = (T[]) new Comparable[size];
     }
     public MyHeap(T[] array){
 	size = 0;
@@ -53,11 +53,11 @@ public class MyHeap<T extends Comparable<T>>
     public T delete(){  /**Throws a no such element exception if size==0 when called**/}
     public T peek(){    /**Throws a no such element exception if size==0 when called**/}
     public void add(T x){
-	for(int i = 0; i < size; i++){
-	    if(data[i] == null){
-		data[i] = x;
-	    }
+	if(size + 1 > data.length){
+	    bigArray();
 	}
+	data[size+1] = x;
+	pushUp(size+1);
     }
     private void heapify(){
 	for(int i = size/2;i>0;i--){
