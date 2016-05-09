@@ -1,0 +1,47 @@
+import java.util.*;
+@SuppressWarnings("unchecked")
+public class MyHeap<T extends Comparable<T>>
+{
+    private int size;
+    private T[] data;
+
+    public MyHeap(){
+    }
+    public MyHeap(T[] array){
+    }
+	/**pushDown
+	   precondition: datas[k]'s children are valid heaps
+	   postconditions:-the element at index k has been 
+	   shifted to the correct spot.
+	   -data[k] and is a valid heap
+	**/
+    
+    private void pushDown(int k){}
+
+	/**pushUp
+	   precondition: data is a heap with at most one item
+	   out of place (element at k)
+	   postconditions:-the element at index k has been 
+	   shifted to the correct spot.
+	   -data is a valid heap
+	**/
+    private void pushUp(int k){
+    }
+    public T delete(){  /**Throws a no such element exception if size==0 when called**/}
+    public T peek(){    /**Throws a no such element exception if size==0 when called**/}
+    public void add(T x){
+    }
+    private void heapify(){
+    }
+    private void doubleSize(){}
+	/**toString returns an array style string, without any nulls   **/
+    public String toString(){}
+
+
+	//do this last
+    public MyHeap(boolean isMax){}
+    public MyHeap(T[] array, boolean isMax){}
+
+	
+}
+
