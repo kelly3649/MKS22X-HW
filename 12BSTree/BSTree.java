@@ -28,7 +28,7 @@ public class BSTree<T extends comparable<T>>{
 	// set/get: data/left/right
 	//real methods here
 	public int height(){ 
-	    return 0;
+	    return 1;
 	}
 	
 	public String toString(){
@@ -58,7 +58,12 @@ public class BSTree<T extends comparable<T>>{
 	//keep track of height.
 	//call the root's methods
 	//check for empty first!
-	return root.height();
+	if(root.getLeft() == null && root.getRight() == null){
+	    return;
+	}
+        if(root.getLeft() == null){
+	    return 1 + root.getHeight();
+	}
     }
 
     public void add(T value){
