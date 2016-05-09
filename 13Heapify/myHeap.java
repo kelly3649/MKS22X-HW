@@ -49,29 +49,72 @@ public class MyHeap<T extends Comparable<T>>
 	   -data is a valid heap
 	**/
     private void pushUp(int k){
+	while(k > 1){
+	    if(data[k/2].compareTo(data[k])<0){
+		    swap(k/2,k);
+		    k = k/2;
+	    }
+	}
     }
-    public T delete(){  /**Throws a no such element exception if size==0 when called**/}
-    public T peek(){    /**Throws a no such element exception if size==0 when called**/}
+    public T delete(){  /**Throws a no such element exception if size==0 when called**/
+	if(size == 0){
+	    throw new NoSuchElementException();
+	} 
+	if(size == 1){
+	    data[1] = null;
+	    size--;
+	}
+	else{
+	//always delete the root
+	swap(1,size);
+	data[size] = null;
+	size--;
+	pushDown(1);
+	}
+}
+    public T peek(){    /**Throws a no such element exception if size==0 when called**/
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
+	else{
+	    return data[1];
+	}
+}
     public void add(T x){
 	if(size + 1 > data.length){
-	    bigArray();
+	    doubleSize();
 	}
 	data[size+1] = x;
 	pushUp(size+1);
+	size++;
     }
     private void heapify(){
 	for(int i = size/2;i>0;i--){
 	    pushDown(i);
+	}
     }
-    private void doubleSize(){}
+    private void doubleSize(){
+	T[] temp = (T[]) new Comparable[data.length*2];
+}
 	/**toString returns an array style string, without any nulls   **/
-    public String toString(){}
+    public String toString(){
+	String retString = "[";
+        for(int i = 0;i<size;i++){
+	    retString += data[i] + ",";
+	}
+	retString += data[size] + "]";
+	return retString;
+    }
 
 
 	//do this last
     public MyHeap(boolean isMax){}
     public MyHeap(T[] array, boolean isMax){}
-
-	
+    public static void main(String[]args){
+	MyHeap<Integer> m1 = new MyHeap<Integer>();
+	m1.add(1);
+	m1.add(-1);
+	System.out.println(m1);
+    }
 }
 
