@@ -57,21 +57,26 @@ public class MyHeap<T extends Comparable<T>>
 	}
     }
     public T delete(){  /**Throws a no such element exception if size==0 when called**/
+	T temp;
 	if(size == 0){
 	    throw new NoSuchElementException();
 	} 
 	if(size == 1){
+	    temp = data[1];
 	    data[1] = null;
-	    size--;
+	    size--;	    
 	}
 	else{
 	//always delete the root
-	swap(1,size);
-	data[size] = null;
-	size--;
-	pushDown(1);
+	    temp = data[1];
+	    swap(1,size);
+	    data[size] = null;
+	    size--;
+	    pushDown(1);
 	}
-}
+	return temp;
+    }
+
     public T peek(){    /**Throws a no such element exception if size==0 when called**/
 	if(size == 0){
 	    throw new NoSuchElementException();
@@ -94,8 +99,18 @@ public class MyHeap<T extends Comparable<T>>
 	}
     }
     private void doubleSize(){
-	T[] temp = (T[]) new Comparable[data.length*2];
-}
+	T[] temp;
+	if(size == 0){
+	    temp = (T[]) new Comparable[1];
+	}
+	else{
+	    temp = (T[]) new Comparable[data.length*2];
+	}
+	for(int i = 0;i<data.length;i++){
+	    temp[i] = data[i];
+	}
+	data = temp;
+    }
 	/**toString returns an array style string, without any nulls   **/
     public String toString(){
 	String retString = "[";
