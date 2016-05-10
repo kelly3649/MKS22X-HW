@@ -4,13 +4,21 @@ public class MyHeap<T extends Comparable<T>>
 {
     private int size;
     private T[] data;
+    private boolean IsMax;
 
-    public MyHeap(){
+    public MyHeap(boolean isMax){
 	size = 0;
-	data = (T[]) new Comparable[size];
+	data = (T[]) new Comparable[10];
     }
-    public MyHeap(T[] array){
+    public MyHeap(T[] array, boolean isMax){
 	size = 0;
+	for(int i = 1;i<array.length-1;i++){
+	    if(array[i+1] != null){
+		size++;
+	    }
+	}
+	size++;
+	System.out.println("size is " + size);
 	data = array;
     }
 	/**pushDown
@@ -53,6 +61,9 @@ public class MyHeap<T extends Comparable<T>>
 	    if(data[k/2].compareTo(data[k])<0){
 		    swap(k/2,k);
 		    k = k/2;
+	    }
+	    else{
+		return;
 	    }
 	}
     }
@@ -100,12 +111,7 @@ public class MyHeap<T extends Comparable<T>>
     }
     private void doubleSize(){
 	T[] temp;
-	if(size == 0){
-	    temp = (T[]) new Comparable[1];
-	}
-	else{
-	    temp = (T[]) new Comparable[data.length*2];
-	}
+	temp = (T[]) new Comparable[data.length*2];
 	for(int i = 0;i<data.length;i++){
 	    temp[i] = data[i];
 	}
@@ -114,7 +120,7 @@ public class MyHeap<T extends Comparable<T>>
 	/**toString returns an array style string, without any nulls   **/
     public String toString(){
 	String retString = "[";
-        for(int i = 0;i<size;i++){
+        for(int i = 1;i<size;i++){
 	    retString += data[i] + ",";
 	}
 	retString += data[size] + "]";
@@ -127,9 +133,15 @@ public class MyHeap<T extends Comparable<T>>
     public MyHeap(T[] array, boolean isMax){}
     public static void main(String[]args){
 	MyHeap<Integer> m1 = new MyHeap<Integer>();
-	m1.add(1);
+	m1.add(5);
+	System.out.println("ITS WORKING");
+	m1.add(4);
+	m1.add(4);
 	m1.add(-1);
+	m1.add(10);
+	System.out.println("ITS WORKING");
 	System.out.println(m1);
+System.out.println("ITS WORKING");
     }
 }
 
