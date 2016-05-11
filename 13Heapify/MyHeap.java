@@ -44,18 +44,19 @@ public class MyHeap<T extends Comparable<T>>
     }
     private void pushDown(int k){
 	while(k <= size/2){
-	    System.out.println("k = " + k);
-	    if(data[k*2-1].compareTo(data[k*2]) > 0){
-		if(data[k*2-1].compareTo(data[k]) > 0){
+	    // System.out.println("k = " + k);    
+	    if(compare(k*2-1,k*2) > 0){
+		if(compare(k*2-1,k) > 0){
 		    swap(k*2-1,k);
 		    k = k*2-1;
 		}
-	    }
-	    else{
-		if(data[k*2].compareTo(data[k]) > 0){
-		    swap(k*2,k);
-		    k = k*2;
+		else{
+		    return;
 		}
+	    }
+      	 else if(compare(k*2,k) > 0){
+		swap(k*2,k);
+		k = k*2;
 	    }
 	    else{
 		return;
@@ -147,17 +148,20 @@ public class MyHeap<T extends Comparable<T>>
 	//do this last
    
     public static void main(String[]args){
-	MyHeap<Integer> m1 = new MyHeap<Integer>(true);
+	MyHeap<Integer> m1 = new MyHeap<Integer>(false);
+	MyHeap<Integer> m2 = new MyHeap<Integer>(false);
 	m1.add(5);
 	System.out.println("ITS WORKING");
 	m1.add(4);
-	m1.add(4);
+	m1.add(3);
 	m1.add(-1);
 	m1.add(10);
 	System.out.println("ITS WORKING");
 	System.out.println(m1);
 	m1.delete();
 	System.out.println(m1);
+	m1.delete();
+        System.out.println(m1);
 System.out.println("ITS WORKING");
     }
 }
