@@ -7,10 +7,12 @@ public class MyHeap<T extends Comparable<T>>
     private boolean IsMax;
 
     public MyHeap(boolean isMax){
+	IsMax = isMax;
 	size = 0;
 	data = (T[]) new Comparable[10];
     }
     public MyHeap(T[] array, boolean isMax){
+	IsMax = isMax;
 	size = 0;
 	for(int i = 1;i<array.length-1;i++){
 	    if(array[i+1] != null){
@@ -20,6 +22,14 @@ public class MyHeap<T extends Comparable<T>>
 	size++;
 	System.out.println("size is " + size);
 	data = array;
+    }
+    public int compare(int ind1, int ind2){
+	if(IsMax){
+	    return data[ind1].compareTo(data[ind2]);
+	}
+	else{
+	    return -1 * data[ind1].compareTo(data[ind2]);
+	}
     }
 	/**pushDown
 	   precondition: datas[k]'s children are valid heaps
@@ -33,18 +43,22 @@ public class MyHeap<T extends Comparable<T>>
 	data[ind2] = temp;
     }
     private void pushDown(int k){
-	while(k <= size){
-	    if(data[k*2].compareTo(data[k*2+1]) > 0){
+	while(k <= size/2){
+	    System.out.println("k = " + k);
+	    if(data[k*2-1].compareTo(data[k*2]) > 0){
+		if(data[k*2-1].compareTo(data[k]) > 0){
+		    swap(k*2-1,k);
+		    k = k*2-1;
+		}
+	    }
+	    else{
 		if(data[k*2].compareTo(data[k]) > 0){
 		    swap(k*2,k);
 		    k = k*2;
 		}
 	    }
 	    else{
-		if(data[k*2+1].compareTo(data[k]) > 0){
-		    swap(k*2+1,k);
-		    k= k*2+1;
-		}
+		return;
 	    }
 	}
     }
@@ -58,7 +72,7 @@ public class MyHeap<T extends Comparable<T>>
 	**/
     private void pushUp(int k){
 	while(k > 1){
-	    if(data[k/2].compareTo(data[k])<0){
+	    if(compare(k/2,k)<0){
 		    swap(k/2,k);
 		    k = k/2;
 	    }
@@ -83,6 +97,8 @@ public class MyHeap<T extends Comparable<T>>
 	    swap(1,size);
 	    data[size] = null;
 	    size--;
+	    System.out.println(toString()); // WORKS
+	    System.out.println(size);
 	    pushDown(1);
 	}
 	return temp;
@@ -129,10 +145,9 @@ public class MyHeap<T extends Comparable<T>>
 
 
 	//do this last
-    public MyHeap(boolean isMax){}
-    public MyHeap(T[] array, boolean isMax){}
+   
     public static void main(String[]args){
-	MyHeap<Integer> m1 = new MyHeap<Integer>();
+	MyHeap<Integer> m1 = new MyHeap<Integer>(true);
 	m1.add(5);
 	System.out.println("ITS WORKING");
 	m1.add(4);
@@ -140,6 +155,8 @@ public class MyHeap<T extends Comparable<T>>
 	m1.add(-1);
 	m1.add(10);
 	System.out.println("ITS WORKING");
+	System.out.println(m1);
+	m1.delete();
 	System.out.println(m1);
 System.out.println("ITS WORKING");
     }
