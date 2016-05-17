@@ -1,0 +1,39 @@
+public class RunningMedian{
+    private MyHeap<Integer> HLeft;
+    private MyHeap<Inteer> HRight;
+    private double median;
+    private int size;
+
+    //Create an empty running median set.
+    public RunningMedian(){
+	HLeft = new MyHeap<Integer>(true); //bc is max heap
+	HRight = new MyHeap<Integer>(false); //bc is min heap
+    }
+    //When empty: throws new NoSuchElementException()
+	//Returns the median value
+    public double getMedian(){
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
+	return median;
+    }
+    public MyHeap getLeft(){
+	return HLeft;
+    }
+    public MyHeap getRight(){
+	return HRight;
+    }
+    
+
+    //add to the "SmallValue" heap if  x < median, 
+    //add to the "BigValue" heap otherwise. 
+    //balance the two heaps so that their size differ by no more than 1.    
+    public void add(Integer x){
+	if(size == 0){
+	    HLeft.add(x);
+	    median = x;
+	}
+    }
+    
+
+}
