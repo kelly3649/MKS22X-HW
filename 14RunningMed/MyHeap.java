@@ -143,7 +143,9 @@ public class MyHeap<T extends Comparable<T>>
 	retString += data[size] + "]";
 	return retString;
     }
-
+    public int getSize(){
+	return size;
+    }
 
 	//do this last
    
